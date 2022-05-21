@@ -1,20 +1,186 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFrameworks>netstandard2.1;Xamarin.iOS10</TargetFrameworks>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <RootNamespace>Buform</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SByteDev.Common.Extensions" Version="1.0.6" />
+        <PackageReference Include="SByteDev.Common.Extensions" Version="1.0.6" />
     </ItemGroup>
 
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <PackageReference Include="SByteDev.Xamarin.iOS.Extensions" Version="1.0.5" />
+    </ItemGroup>
+
+    <!--    Button    -->
+
     <ItemGroup>
-      <Compile Update="Picker\IPickerFormItemBase.cs">
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Include="Button\ButtonFormItem.cs" />
+        <Compile Include="Button\ButtonInputType.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Button\ButtonFormCell.cs" />
+    </ItemGroup>
+
+
+    <!--    DateTime    -->
+
+    <ItemGroup>
+        <Compile Include="DateTime\DateTimeFormItem.cs" />
+        <Compile Include="DateTime\DateTimeInputType.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="DateTime\DateTimeFormCell.cs" />
+        <Compile Include="DateTime\DateTimeExtensions.cs" />
+        <Compile Include="DateTime\NsDateExtensions.cs" />
+    </ItemGroup>
+
+    <!--    List    -->
+
+    <ItemGroup>
+        <Compile Include="List\IListFormGroup.cs" />
+        <Compile Include="List\IListFormItem.cs" />
+        <Compile Include="List\ListFormGroup.cs" />
+        <Compile Include="List\ListFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="List\ListFormCell.cs" />
+        <Compile Include="List\ListFormGroupFooter.cs" />
+        <Compile Include="List\ListFormGroupHeader.cs" />
+    </ItemGroup>
+
+    <!--    Picker    -->
+
+    <ItemGroup>
+        <Compile Include="Picker\AsyncPickerFormItem.cs" />
+        <Compile Include="Picker\AsyncPickerLoadingState.cs" />
+        <Compile Include="Picker\CallbackPickerFormItem.cs" />
+        <Compile Include="Picker\IAsyncPickerFormItem.cs" />
+        <Compile Include="Picker\ICallbackPickerFormItem.cs" />
+        <Compile Include="Picker\IMultiValuePickerFormItem.cs" />
+        <Compile Include="Picker\IPickerFormItem.cs" />
+        <Compile Include="Picker\IPickerFormItemBase.cs" />
+        <Compile Include="Picker\IPickerOptionFormItem.cs" />
+        <Compile Include="Picker\MultiValuePickerFormItem.cs" />
+        <Compile Include="Picker\PickerFormItem.cs" />
+        <Compile Include="Picker\PickerFormItemBase.cs" />
+        <Compile Include="Picker\PickerInputType.cs" />
+        <Compile Include="Picker\PickerOptionFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Picker\AsyncPickerFormCell.cs" />
+        <Compile Include="Picker\AsyncPickerViewController.cs" />
+        <Compile Include="Picker\CallbackPickerFormCell.cs" />
+        <Compile Include="Picker\DefaultPickerPresenter.cs" />
+        <Compile Include="Picker\DialogPickerPresenter.cs" />
+        <Compile Include="Picker\MultiValuePickerFormCell.cs" />
+        <Compile Include="Picker\PickerFormCell.cs" />
+        <Compile Include="Picker\PickerFormCellBase.cs" />
+        <Compile Include="Picker\PickerPresenterBase.cs" />
+        <Compile Include="Picker\PickerViewController.cs" />
+        <Compile Include="Picker\PopUpPickerPresenter.cs" />
+    </ItemGroup>
+
+    <!--    Segments    -->
+
+    <ItemGroup>
+        <Compile Include="Segments\ISegmentsFormItem.cs" />
+        <Compile Include="Segments\SegmentsFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Segments\SegmentsFormCell.cs" />
+    </ItemGroup>
+
+    <!--    Slider    -->
+
+    <ItemGroup>
+        <Compile Include="Slider\SliderFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Slider\SliderFormCell.cs" />
+    </ItemGroup>
+
+    <!--    Stepper    -->
+
+    <ItemGroup>
+        <Compile Include="Stepper\StepperFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Stepper\StepperFormCell.cs" />
+    </ItemGroup>
+
+    <!--    Switch    -->
+
+    <ItemGroup>
+        <Compile Include="Switch\SwitchFormItem.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Switch\SwitchFormCell.cs" />
+    </ItemGroup>
+
+    <!--    Text    -->
+
+    <ItemGroup>
+        <Compile Include="Text\IMultilineTextFormItem.cs" />
+        <Compile Include="Text\ITextFormItem.cs" />
+        <Compile Include="Text\MultilineTextFormItem.cs" />
+        <Compile Include="Text\TextFormGroup.cs" />
+        <Compile Include="Text\TextFormItem.cs" />
+        <Compile Include="Text\TextInputType.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Text\MultilineTextFormCell.cs" />
+        <Compile Include="Text\TextFormCell.cs" />
+        <Compile Include="Text\TextFormGroupFooter.cs" />
+        <Compile Include="Text\TextFormGroupHeader.cs" />
+    </ItemGroup>
+
+    <!--    Validation    -->
+
+    <ItemGroup>
+        <Compile Include="Validation\FormValidationError.cs" />
+        <Compile Include="Validation\IValidatableFormItem.cs" />
+        <Compile Include="Validation\ValidatableForm.cs" />
+        <Compile Include="Validation\ValidatableFormItem.cs" />
+    </ItemGroup>
+
+    <!--    Common    -->
+
+    <ItemGroup>
+        <Compile Include="ExpressionExtensions.cs" />
+        <Compile Include="Form.cs" />
+        <Compile Include="FormCollection.cs" />
+        <Compile Include="FormGroup.cs" />
+        <Compile Include="FormItem.cs" />
+        <Compile Include="FormValueChangedEventArgs.cs" />
+        <Compile Include="FormViewNotFoundException.cs" />
+        <Compile Include="IFormGroup.cs" />
+        <Compile Include="IFormItem.cs" />
+        <Compile Include="WeakEventSubscription.cs" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Buform.cs" />
+        <Compile Include="FormHeaderFooter.cs" />
+        <Compile Include="FormCell.cs" />
+        <Compile Include="FormGroupRegistry.cs" />
+        <Compile Include="FormItemRegistry.cs" />
+        <Compile Include="FormTableViewSource.cs" />
+        <Compile Include="IExpandableCellController.cs" />
+        <Compile Include="TableViewSource.cs" />
     </ItemGroup>
 
 </Project>

@@ -6,8 +6,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform", "Buform\Buform.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.MvvmCross.Core", "Buform.Example.MvvmCross.Core\Buform.Example.MvvmCross.Core.csproj", "{8738CA21-E070-4D53-9E19-84DFB385152C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.iOS", "Buform.iOS\Buform.iOS.csproj", "{F9AC6233-4102-4712-903B-F48783D93805}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.FluentValidation", "Buform.FluentValidation\Buform.FluentValidation.csproj", "{93B30462-F203-47A4-8C5C-7984C473D486}"
 EndProject
 Global
@@ -46,14 +44,6 @@ Global
 		{8738CA21-E070-4D53-9E19-84DFB385152C}.Release|iPhone.Build.0 = Release|Any CPU
 		{8738CA21-E070-4D53-9E19-84DFB385152C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8738CA21-E070-4D53-9E19-84DFB385152C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Release|iPhone.Build.0 = Release|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{F9AC6233-4102-4712-903B-F48783D93805}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
