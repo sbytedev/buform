@@ -6,6 +6,23 @@
         <Nullable>enable</Nullable>
         <LangVersion>default</LangVersion>
         <RootNamespace>Buform</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>SByteDev.Buform</PackageId>
+        <PackageVersion>0.0.1</PackageVersion>
+        <Title>Buform</Title>
+        <Description>A cross-platform form builder for Xamarin.</Description>
+        <Copyright>SByteDev</Copyright>
+        <Authors>Prin53, SByteDev</Authors>
+        <Owners>Prin53, SByteDev</Owners>
+        <NeutralLanguage>en</NeutralLanguage>
+        <PackageTags>xamarin, forms, form</PackageTags>
+        <PackageProjectUrl>https://github.com/SByteDev/Buform</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReleaseNotes>This is a first version of Buform.</PackageReleaseNotes>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/SByteDev/Buform</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
