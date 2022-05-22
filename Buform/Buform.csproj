@@ -36,7 +36,7 @@
     <!--    Button    -->
 
     <ItemGroup>
-        <Compile Include="ComponentAttribute.cs" />
+        <Compile Include="FormComponentAttribute.cs" />
         <Compile Include="Button\ButtonFormItem.cs" />
         <Compile Include="Button\ButtonInputType.cs" />
     </ItemGroup>

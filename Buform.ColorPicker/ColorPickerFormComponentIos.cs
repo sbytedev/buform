@@ -1,8 +1,8 @@
 namespace Buform
 {
-    [Component]
+    [FormComponent]
     // ReSharper disable once UnusedType.Global
-    public class ColorPicker : IFormComponent
+    public class ColorPickerFormComponent : IFormComponent
     {
         public void Register()
         {

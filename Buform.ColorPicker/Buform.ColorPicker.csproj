@@ -39,7 +39,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="ColorPickerFormCell.cs" />
-        <Compile Include="ColorPickerIos.cs" />
+        <Compile Include="ColorPickerFormComponentIos.cs" />
         <Compile Include="ColorPickerViewControllerDelegate.cs" />
     </ItemGroup>
 

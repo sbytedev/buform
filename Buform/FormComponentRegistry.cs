@@ -19,7 +19,7 @@ namespace Buform
 
                 foreach (var type in types)
                 {
-                    if (type.GetCustomAttributes(typeof(ComponentAttribute), false).Length <= 0)
+                    if (type.GetCustomAttributes(typeof(FormComponentAttribute), false).Length <= 0)
                     {
                         continue;
                     }
