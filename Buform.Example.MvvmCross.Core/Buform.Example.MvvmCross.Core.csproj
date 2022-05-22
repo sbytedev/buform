@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Buform.ColorPicker\Buform.ColorPicker.csproj" />
       <ProjectReference Include="..\Buform\Buform.csproj" />
       <ProjectReference Include="..\Buform.FluentValidation\Buform.FluentValidation.csproj" />
     </ItemGroup>

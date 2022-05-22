@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.MvvmCross.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.FluentValidation", "Buform.FluentValidation\Buform.FluentValidation.csproj", "{93B30462-F203-47A4-8C5C-7984C473D486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.ColorPicker", "Buform.ColorPicker\Buform.ColorPicker.csproj", "{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhone = Debug|iPhone
@@ -52,5 +54,13 @@ Global
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Release|iPhone.Build.0 = Release|Any CPU
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{93B30462-F203-47A4-8C5C-7984C473D486}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhone.Build.0 = Release|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

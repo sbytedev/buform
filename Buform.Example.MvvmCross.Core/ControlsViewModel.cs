@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Buform.Example.MvvmCross.Core
 
         public ICommand CloseCommand { get; }
         public ICommand ToggleReadOnlyModeCommand { get; }
+        public Color Color { get; set; }
         public Enum Segments { get; set; }
         public string? Text { get; set; }
         public string? MultilineText { get; set; }
@@ -44,6 +46,7 @@ namespace Buform.Example.MvvmCross.Core
         public ControlsViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
+            Color = Color.Gold;
             MultilineText = new LipsumGenerator().GenerateLipsum(1);
             DateTime = DateTime.UtcNow;
 
@@ -56,6 +59,13 @@ namespace Buform.Example.MvvmCross.Core
 
             Form = new Form(this)
             {
+                new TextFormGroup("Color Pickers")
+                {
+                    new ColorPickerFormItem(() => Color)
+                    {
+                        Label = "Color Picker"
+                    }
+                },
                 new ListFormGroup<int>("List")
                 {
                     Formatter = item => item.ToWords(),
