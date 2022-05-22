@@ -77,26 +77,13 @@ namespace Buform
 
             PickerPresenter?.Dispose();
 
-            switch (Item.InputType)
+            PickerPresenter = Item.InputType switch
             {
-                case PickerInputType.Default:
-                    PickerPresenter = new DefaultPickerPresenter<IPickerFormItem>(CreateViewController);
-                    Accessory = UITableViewCellAccessory.DisclosureIndicator;
-                    ValueLabelTrailingConstraint!.Constant = -8;
-                    break;
-                case PickerInputType.Dialog:
-                    PickerPresenter = new DialogPickerPresenter<IPickerFormItem>(CreateViewController);
-                    Accessory = UITableViewCellAccessory.None;
-                    ValueLabelTrailingConstraint!.Constant = -ContentView.LayoutMargins.Right;
-                    break;
-                case PickerInputType.PopUp:
-                    PickerPresenter = new PopUpPickerPresenter<IPickerFormItem>(CreateAlertController);
-                    Accessory = UITableViewCellAccessory.None;
-                    ValueLabelTrailingConstraint!.Constant = -ContentView.LayoutMargins.Right;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(Item.InputType), Item.InputType, null);
-            }
+                PickerInputType.Default => new DefaultPickerPresenter<IPickerFormItem>(CreateViewController),
+                PickerInputType.Dialog => new DialogPickerPresenter<IPickerFormItem>(CreateViewController),
+                PickerInputType.PopUp => new PopUpPickerPresenter<IPickerFormItem>(CreateAlertController),
+                _ => throw new ArgumentOutOfRangeException(nameof(Item.InputType), Item.InputType, null)
+            };
         }
 
         protected override void OnItemSet()
