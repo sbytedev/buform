@@ -29,16 +29,18 @@
         <ProjectReference Include="..\Buform\Buform.csproj" />
     </ItemGroup>
 
+    <ItemGroup Condition="'$(TargetFramework)' == 'Xamarin.iOS10'">
+        <PackageReference Include="SByteDev.Xamarin.iOS.Extensions" Version="1.0.6" />
+    </ItemGroup>
+
     <ItemGroup>
         <Compile Include="ColorPickerFormItem.cs" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-        <Compile Include="ColorExtensions.cs" />
         <Compile Include="ColorPickerFormCell.cs" />
         <Compile Include="ColorPickerIos.cs" />
         <Compile Include="ColorPickerViewControllerDelegate.cs" />
-        <Compile Include="UiColorExtensions.cs" />
     </ItemGroup>
 
 </Project>

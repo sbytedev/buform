@@ -123,7 +123,7 @@
         <PackageReference Include="MvvmCross" Version="8.0.2" />
         <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" PrivateAssets="All" />
         <PackageReference Include="SByteDev.Common.Extensions" Version="1.0.6" />
-        <PackageReference Include="SByteDev.Xamarin.iOS.Extensions" Version="1.0.5" />
+        <PackageReference Include="SByteDev.Xamarin.iOS.Extensions" Version="1.0.6" />
         <PackageReference Include="Serilog" Version="2.11.0" />
         <PackageReference Include="Serilog.Enrichers.Xamarin" Version="0.2.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />

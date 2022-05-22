@@ -1,6 +1,7 @@
 using System;
 using CoreGraphics;
 using Foundation;
+using SByteDev.Xamarin.iOS.Extensions;
 using UIKit;
 
 namespace Buform
@@ -52,8 +53,7 @@ namespace Buform
             ColorView = new UIView
             {
                 Frame = new CGRect(0, 0, 22, 22),
-                ClipsToBounds = true,
-                BackgroundColor = UIColor.Black
+                ClipsToBounds = true
             };
 
             ColorView.Layer.CornerRadius = 11;
