@@ -146,6 +146,15 @@ namespace Buform
                 case nameof(Item.IsReadOnly):
                     UpdateReadOnlyState();
                     break;
+                case nameof(Item.MinValue):
+                    UpdateMinValue();
+                    break;
+                case nameof(Item.MaxValue):
+                    UpdateMaxValue();
+                    break;
+                case nameof(Item.StepAmount):
+                    UpdateStepAmount();
+                    break;
                 case nameof(Item.Label):
                     UpdateLabel();
                     break;
