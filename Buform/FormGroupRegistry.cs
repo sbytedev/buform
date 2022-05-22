@@ -9,26 +9,31 @@ namespace Buform
     [Preserve(AllMembers = true)]
     public sealed class FormGroupRegistry
     {
+        private enum HolderType
+        {
+            Class,
+            Nib
+        }
+
         private sealed class Holder
         {
-            public string HeaderReuseIdentifier { get; }
-            public string FooterReuseIdentifier { get; }
+            public Type HeaderType { get; }
+            public Type FooterType { get; }
 
-            public Holder(string headerReuseIdentifier, string footerReuseIdentifier)
+            public HolderType Type { get; }
+
+            public Holder(Type headerType, Type footerType, HolderType type)
             {
-                HeaderReuseIdentifier = headerReuseIdentifier ?? throw new ArgumentNullException(nameof(headerReuseIdentifier));
-                FooterReuseIdentifier = footerReuseIdentifier ?? throw new ArgumentNullException(nameof(footerReuseIdentifier));
+                HeaderType = headerType ?? throw new ArgumentNullException(nameof(headerType));
+                FooterType = footerType ?? throw new ArgumentNullException(nameof(footerType));
+                Type = type;
             }
         }
 
-        private readonly UITableView _tableView;
-
         private readonly IDictionary<Type, Holder> _holders;
 
-        public FormGroupRegistry(UITableView tableView)
+        public FormGroupRegistry()
         {
-            _tableView = tableView ?? throw new ArgumentNullException(nameof(tableView));
-
             _holders = new Dictionary<Type, Holder>();
         }
 
@@ -59,15 +64,11 @@ namespace Buform
             where TGroupHeader : FormHeaderFooter<TGroup>
             where TGroupFooter : FormHeaderFooter<TGroup>
         {
-            var holder = new Holder(
-                typeof(TGroupHeader).Name,
-                typeof(TGroupFooter).Name
+            _holders[typeof(TGroup)] = new Holder(
+                typeof(TGroupHeader),
+                typeof(TGroupFooter),
+                HolderType.Class
             );
-
-            _tableView.RegisterClassForHeaderFooterViewReuse(typeof(TGroupHeader), holder.HeaderReuseIdentifier);
-            _tableView.RegisterClassForHeaderFooterViewReuse(typeof(TGroupFooter), holder.FooterReuseIdentifier);
-
-            _holders[typeof(TGroup)] = holder;
         }
 
         public void RegisterHeaderNib<TGroup, TGroupHeader, TGroupFooter>()
@@ -75,22 +76,42 @@ namespace Buform
             where TGroupHeader : FormHeaderFooter<TGroup>
             where TGroupFooter : FormHeaderFooter<TGroup>
         {
-            var holder = new Holder(
-                typeof(TGroupHeader).Name,
-                typeof(TGroupFooter).Name
+            _holders[typeof(TGroup)] = new Holder(
+                typeof(TGroupHeader),
+                typeof(TGroupFooter),
+                HolderType.Nib
             );
+        }
 
-            _tableView.RegisterNibForHeaderFooterViewReuse(
-                UINib.FromName(typeof(TGroupHeader).Name, NSBundle.MainBundle),
-                holder.HeaderReuseIdentifier
-            );
+        public void Register(UITableView tableView)
+        {
+            if (tableView == null)
+            {
+                throw new ArgumentNullException(nameof(tableView));
+            }
 
-            _tableView.RegisterNibForHeaderFooterViewReuse(
-                UINib.FromName(typeof(TGroupFooter).Name, NSBundle.MainBundle),
-                holder.FooterReuseIdentifier
-            );
-
-            _holders[typeof(TGroup)] = holder;
+            foreach (var holder in _holders.Values)
+            {
+                switch(holder.Type)
+                {
+                    case HolderType.Class:
+                        tableView.RegisterClassForHeaderFooterViewReuse(holder.HeaderType, holder.HeaderType.Name);
+                        tableView.RegisterClassForHeaderFooterViewReuse(holder.FooterType, holder.FooterType.Name);
+                        break;
+                    case HolderType.Nib:
+                        tableView.RegisterNibForHeaderFooterViewReuse(
+                            UINib.FromName(holder.HeaderType.Name, NSBundle.MainBundle),
+                            holder.HeaderType.Name
+                        );
+                        tableView.RegisterNibForHeaderFooterViewReuse(
+                            UINib.FromName(holder.FooterType.Name, NSBundle.MainBundle),
+                            holder.FooterType.Name
+                        );
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         public bool TryGetHeaderReuseIdentifier(Type groupType, out string? reuseIdentifier)
@@ -104,7 +125,7 @@ namespace Buform
 
             if (result)
             {
-                reuseIdentifier = holder!.HeaderReuseIdentifier;
+                reuseIdentifier = holder!.HeaderType.Name;
 
                 return true;
             }
@@ -125,7 +146,7 @@ namespace Buform
 
             if (result)
             {
-                reuseIdentifier = holder!.FooterReuseIdentifier;
+                reuseIdentifier = holder!.FooterType.Name;
 
                 return true;
             }

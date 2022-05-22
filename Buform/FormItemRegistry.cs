@@ -9,27 +9,31 @@ namespace Buform
     [Preserve(AllMembers = true)]
     public sealed class FormItemRegistry
     {
+        private enum HolderType
+        {
+            Class,
+            Nib
+        }
+
         private sealed class Holder
         {
-            public string ReuseIdentifier { get; }
-            public string? ExpandedReuseIdentifier { get; }
+            public Type CellType { get; }
+            public Type? ExpandedCellType { get; }
 
-            public Holder(string reuseIdentifier, string? expandedReuseIdentifier = default)
+            public HolderType Type { get; }
+
+            public Holder(Type cellType, Type? expandedCellType, HolderType type)
             {
-                ReuseIdentifier = reuseIdentifier ?? throw new ArgumentNullException(nameof(reuseIdentifier));
-
-                ExpandedReuseIdentifier = expandedReuseIdentifier;
+                CellType = cellType ?? throw new ArgumentNullException(nameof(cellType));
+                ExpandedCellType = expandedCellType;
+                Type = type;
             }
         }
 
-        private readonly UITableView _tableView;
-
         private readonly IDictionary<Type, Holder> _holders;
 
-        public FormItemRegistry(UITableView tableView)
+        public FormItemRegistry()
         {
-            _tableView = tableView ?? throw new ArgumentNullException(nameof(tableView));
-
             _holders = new Dictionary<Type, Holder>();
         }
 
@@ -59,11 +63,11 @@ namespace Buform
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
         {
-            var holder = new Holder(typeof(TItemView).Name);
-
-            _tableView.RegisterClassForCellReuse(typeof(TItemView), holder.ReuseIdentifier);
-
-            _holders[typeof(TItem)] = holder;
+            _holders[typeof(TItem)] = new Holder(
+                typeof(TItemView),
+                null,
+                HolderType.Class
+            );
         }
 
         public void RegisterClass<TItem, TItemView, TExpandedItemView>()
@@ -71,26 +75,22 @@ namespace Buform
             where TItemView : FormCell<TItem>
             where TExpandedItemView : FormCell<TItem>
         {
-            var holder = new Holder(typeof(TItemView).Name, typeof(TExpandedItemView).Name);
-
-            _tableView.RegisterClassForCellReuse(typeof(TItemView), holder.ReuseIdentifier);
-            _tableView.RegisterClassForCellReuse(typeof(TExpandedItemView), holder.ExpandedReuseIdentifier!);
-
-            _holders[typeof(TItem)] = holder;
+            _holders[typeof(TItem)] = new Holder(
+                typeof(TItemView),
+                typeof(TExpandedItemView),
+                HolderType.Class
+            );
         }
 
         public void RegisterNib<TItem, TItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
         {
-            var holder = new Holder(typeof(TItemView).Name);
-
-            _tableView.RegisterNibForCellReuse(
-                UINib.FromName(typeof(TItemView).Name, NSBundle.MainBundle),
-                holder.ReuseIdentifier
+            _holders[typeof(TItem)] = new Holder(
+                typeof(TItemView),
+                null,
+                HolderType.Nib
             );
-
-            _holders[typeof(TItem)] = holder;
         }
 
         public void RegisterNib<TItem, TItemView, TExpandedItemView>()
@@ -98,19 +98,48 @@ namespace Buform
             where TItemView : FormCell<TItem>
             where TExpandedItemView : FormCell<TItem>
         {
-            var holder = new Holder(typeof(TItemView).Name, typeof(TExpandedItemView).Name);
-
-            _tableView.RegisterNibForCellReuse(
-                UINib.FromName(typeof(TItemView).Name, NSBundle.MainBundle),
-                holder.ReuseIdentifier
+            _holders[typeof(TItem)] = new Holder(
+                typeof(TItemView),
+                typeof(TExpandedItemView),
+                HolderType.Nib
             );
+        }
 
-            _tableView.RegisterNibForCellReuse(
-                UINib.FromName(typeof(TExpandedItemView).Name, NSBundle.MainBundle),
-                holder.ExpandedReuseIdentifier!
-            );
+        public void Register(UITableView tableView)
+        {
+            if (tableView == null)
+            {
+                throw new ArgumentNullException(nameof(tableView));
+            }
 
-            _holders[typeof(TItem)] = holder;
+            foreach (var holder in _holders.Values)
+            {
+                switch(holder.Type)
+                {
+                    case HolderType.Class:
+                        tableView.RegisterClassForCellReuse(holder.CellType, holder.CellType.Name);
+                        if (holder.ExpandedCellType != null)
+                        {
+                            tableView.RegisterClassForCellReuse(holder.ExpandedCellType, holder.ExpandedCellType.Name);
+                        }
+                        break;
+                    case HolderType.Nib:
+                        tableView.RegisterNibForCellReuse(
+                            UINib.FromName(holder.CellType.Name, NSBundle.MainBundle),
+                            holder.CellType.Name
+                        );
+                        if (holder.ExpandedCellType != null)
+                        {
+                            tableView.RegisterNibForCellReuse(
+                                UINib.FromName(holder.ExpandedCellType.Name, NSBundle.MainBundle),
+                                holder.ExpandedCellType.Name
+                            );
+                        }
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         public bool TryGetReuseIdentifier(Type itemType, out string? reuseIdentifier)
@@ -124,7 +153,7 @@ namespace Buform
 
             if (result)
             {
-                reuseIdentifier = holder!.ReuseIdentifier;
+                reuseIdentifier = holder!.CellType.Name;
 
                 return true;
             }
@@ -145,7 +174,7 @@ namespace Buform
 
             if (result)
             {
-                reuseIdentifier = holder!.ExpandedReuseIdentifier;
+                reuseIdentifier = holder!.ExpandedCellType?.Name;
 
                 return reuseIdentifier != null;
             }

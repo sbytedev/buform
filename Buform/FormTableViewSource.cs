@@ -14,30 +14,9 @@ namespace Buform
             set => Items = value;
         }
 
-        public FormGroupRegistry GroupRegistry { get; }
-        public FormItemRegistry ItemRegistry { get; }
-
         public FormTableViewSource(UITableView tableView) : base(tableView)
         {
-            GroupRegistry = new FormGroupRegistry(TableView);
-            ItemRegistry = new FormItemRegistry(TableView);
-
-            GroupRegistry.RegisterHeaderClass<TextFormGroup, TextFormGroupHeader, TextFormGroupFooter>();
-            GroupRegistry.RegisterHeaderClass<IListFormGroup, ListFormGroupHeader, ListFormGroupFooter>();
-
-            ItemRegistry.RegisterClass<ButtonFormItem, ButtonFormCell>();
-            ItemRegistry.RegisterClass<DateTimeFormItem, DateTimeFormCell>();
-            ItemRegistry.RegisterClass<IAsyncPickerFormItem, AsyncPickerFormCell>();
-            ItemRegistry.RegisterClass<ICallbackPickerFormItem, CallbackPickerFormCell>();
-            ItemRegistry.RegisterClass<IListFormItem, ListFormCell>();
-            ItemRegistry.RegisterClass<IMultilineTextFormItem, MultilineTextFormCell>();
-            ItemRegistry.RegisterClass<IMultiValuePickerFormItem, MultiValuePickerFormCell>();
-            ItemRegistry.RegisterClass<IPickerFormItem, PickerFormCell>();
-            ItemRegistry.RegisterClass<ISegmentsFormItem, SegmentsFormCell>();
-            ItemRegistry.RegisterClass<ITextFormItem, TextFormCell>();
-            ItemRegistry.RegisterClass<SliderFormItem, SliderFormCell>();
-            ItemRegistry.RegisterClass<StepperFormItem, StepperFormCell>();
-            ItemRegistry.RegisterClass<SwitchFormItem, SwitchFormCell>();
+            Buform.Register(TableView);
         }
 
         private IFormItem? GetItem(NSIndexPath indexPath)
@@ -74,7 +53,7 @@ namespace Buform
 
         protected override string? GetHeaderReuseIdentifier(object item)
         {
-            if (!GroupRegistry.TryGetHeaderReuseIdentifier(item.GetType(), out var reuseIdentifier))
+            if (!Buform.TryGetHeaderReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }
@@ -84,7 +63,7 @@ namespace Buform
 
         protected override string? GetFooterReuseIdentifier(object item)
         {
-            if (!GroupRegistry.TryGetFooterReuseIdentifier(item.GetType(), out var reuseIdentifier))
+            if (!Buform.TryGetFooterReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }
@@ -94,7 +73,7 @@ namespace Buform
 
         protected override string? GetCellReuseIdentifier(object item)
         {
-            if (!ItemRegistry.TryGetReuseIdentifier(item.GetType(), out var reuseIdentifier))
+            if (!Buform.TryGetReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }
@@ -104,7 +83,7 @@ namespace Buform
 
         protected override string? GetExpandedCellReuseIdentifier(object item)
         {
-            if (!ItemRegistry.TryGetExpandedReuseIdentifier(item.GetType(), out var reuseIdentifier))
+            if (!Buform.TryGetExpandedReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }

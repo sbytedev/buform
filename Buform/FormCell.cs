@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using Foundation;
+using SByteDev.Xamarin.iOS.Extensions;
 using UIKit;
 
 namespace Buform
@@ -46,6 +47,11 @@ namespace Buform
                         break;
                 }
             }
+        }
+
+        protected static UIViewController? GetViewController()
+        {
+            return UIApplication.SharedApplication.GetTopViewController();
         }
 
         protected abstract void Initialize();

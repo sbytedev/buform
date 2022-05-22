@@ -177,6 +177,7 @@
     <!--    Common    -->
 
     <ItemGroup>
+        <Compile Include="Buform.cs" />
         <Compile Include="ExpressionExtensions.cs" />
         <Compile Include="Form.cs" />
         <Compile Include="FormCollection.cs" />
@@ -190,10 +191,10 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-        <Compile Include="Buform.cs" />
-        <Compile Include="FormHeaderFooter.cs" />
+        <Compile Include="BuformIos.cs" />
         <Compile Include="FormCell.cs" />
         <Compile Include="FormGroupRegistry.cs" />
+        <Compile Include="FormHeaderFooter.cs" />
         <Compile Include="FormItemRegistry.cs" />
         <Compile Include="FormTableViewSource.cs" />
         <Compile Include="IExpandableCellController.cs" />
