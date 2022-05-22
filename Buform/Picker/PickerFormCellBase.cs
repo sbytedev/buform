@@ -7,6 +7,7 @@ namespace Buform
     {
         protected virtual UILabel? Label { get; set; }
         protected virtual UILabel? ValueLabel { get; set; }
+        protected virtual NSLayoutConstraint? ValueLabelTrailingConstraint { get; set; }
 
         protected PickerFormCellBase()
         {
@@ -21,7 +22,6 @@ namespace Buform
         protected override void Initialize()
         {
             SelectionStyle = UITableViewCellSelectionStyle.Default;
-            Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
             Label = new UILabel
             {
@@ -41,6 +41,8 @@ namespace Buform
 
             ContentView.AddSubviews(Label, ValueLabel);
 
+            ValueLabelTrailingConstraint = ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right);
+
             ContentView.AddConstraints(new[]
             {
                 Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
@@ -49,7 +51,7 @@ namespace Buform
                 ValueLabel.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
                 ValueLabel.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
                 ValueLabel.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 8),
-                ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -8)
+                ValueLabelTrailingConstraint
             });
         }
 
