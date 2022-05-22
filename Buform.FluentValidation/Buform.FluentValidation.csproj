@@ -1,9 +1,10 @@
-<Project Sdk="MSBuild.Sdk.Extras/3.0.44" ToolsVersion="15.0">
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
     <PropertyGroup>
         <TargetFrameworks>netstandard2.1;Xamarin.iOS10</TargetFrameworks>
-        <LangVersion>default</LangVersion>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
         <Nullable>enable</Nullable>
+        <LangVersion>default</LangVersion>
         <RootNamespace>Buform</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>SByteDev.Buform.FluentValidation</PackageId>
@@ -30,6 +31,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Buform\Buform.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="FluentValidationForm.cs" />
     </ItemGroup>
 
 </Project>
