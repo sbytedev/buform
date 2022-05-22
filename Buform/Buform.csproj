@@ -36,6 +36,7 @@
     <!--    Button    -->
 
     <ItemGroup>
+        <Compile Include="ComponentAttribute.cs" />
         <Compile Include="Button\ButtonFormItem.cs" />
         <Compile Include="Button\ButtonInputType.cs" />
     </ItemGroup>
@@ -48,6 +49,7 @@
     <!--    DateTime    -->
 
     <ItemGroup>
+        <Compile Include="FormComponentRegistry.cs" />
         <Compile Include="DateTime\DateTimeFormItem.cs" />
         <Compile Include="DateTime\DateTimeInputType.cs" />
     </ItemGroup>
@@ -61,6 +63,7 @@
     <!--    List    -->
 
     <ItemGroup>
+        <Compile Include="IFormComponent.cs" />
         <Compile Include="List\IListFormGroup.cs" />
         <Compile Include="List\IListFormItem.cs" />
         <Compile Include="List\ListFormGroup.cs" />
@@ -177,7 +180,6 @@
     <!--    Common    -->
 
     <ItemGroup>
-        <Compile Include="Buform.cs" />
         <Compile Include="ExpressionExtensions.cs" />
         <Compile Include="Form.cs" />
         <Compile Include="FormCollection.cs" />

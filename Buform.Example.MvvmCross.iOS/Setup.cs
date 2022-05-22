@@ -41,12 +41,5 @@ namespace Buform.Example.MvvmCross.iOS
 
             iocProvider.LazyConstructAndRegisterSingleton<IMvxCommandHelper, MvxStrongCommandHelper>();
         }
-
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
-        {
-            base.InitializeLastChance(iocProvider);
-
-            ColorPicker.Register();
-        }
     }
 }

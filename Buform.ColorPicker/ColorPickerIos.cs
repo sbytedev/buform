@@ -1,8 +1,10 @@
 namespace Buform
 {
-    public static partial class ColorPicker
+    [Component]
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class ColorPicker : IFormComponent
     {
-        public static void Register()
+        public void Register()
         {
             Buform.RegisterClass<ColorPickerFormItem, ColorPickerFormCell>();
         }

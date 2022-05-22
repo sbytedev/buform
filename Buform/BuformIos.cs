@@ -4,7 +4,7 @@ using UIKit;
 
 namespace Buform
 {
-    public static partial class Buform
+    public static class Buform
     {
         private static readonly FormGroupRegistry GroupRegistry;
         private static readonly FormItemRegistry ItemRegistry;
@@ -15,6 +15,8 @@ namespace Buform
             ItemRegistry = new FormItemRegistry();
 
             Register();
+
+            FormComponentRegistry.Register();
         }
 
         private static void Register()
