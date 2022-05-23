@@ -73,7 +73,7 @@ namespace Buform
             Label.TextColor = Item?.InputType switch
             {
                 ButtonInputType.Default => UIColor.Label,
-                ButtonInputType.Done => UIColor.SystemBlue,
+                ButtonInputType.Done => UIButton.Appearance.TintColor,
                 ButtonInputType.Destructive => UIColor.SystemRed,
                 null => UIColor.SystemBlue,
                 _ => throw new ArgumentOutOfRangeException(nameof(Item.InputType), Item?.InputType, null)
