@@ -24,11 +24,11 @@ namespace Buform.Example.MvvmCross.Core
                 {
                     new ButtonFormItem(new MvxAsyncCommand(ShowControlsAsync))
                     {
-                        Label = "Show Controls",
+                        Label = "Show All Components",
                         InputType = ButtonInputType.Done
                     }
                 },
-                new TextFormGroup("Examples")
+                new TextFormGroup("Examples", "Contains some real-life examples.")
                 {
                     new ButtonFormItem(new MvxAsyncCommand(CreateConnectionAsync))
                     {
@@ -46,7 +46,7 @@ namespace Buform.Example.MvvmCross.Core
 
         private Task ShowControlsAsync(CancellationToken cancellationToken)
         {
-            return NavigationService.Navigate<ControlsViewModel>(cancellationToken: cancellationToken);
+            return NavigationService.Navigate<ComponentsViewModel>(cancellationToken: cancellationToken);
         }
 
         private Task CreateConnectionAsync(CancellationToken cancellationToken)

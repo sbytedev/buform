@@ -8,11 +8,11 @@ namespace Buform.Example.MvvmCross.iOS
 {
     [Preserve(AllMembers = true)]
     [MvxModalPresentation(WrapInNavigationController = true, ModalPresentationStyle = UIModalPresentationStyle.FormSheet)]
-    public sealed class ControlsViewController : MvxTableViewController<ControlsViewModel>
+    public sealed class ComponentsViewController : MvxTableViewController<ComponentsViewModel>
     {
         private FormTableViewSource? _source;
 
-        public ControlsViewController() : base(UITableViewStyle.InsetGrouped)
+        public ComponentsViewController() : base(UITableViewStyle.InsetGrouped)
         {
             /* Required constructor */
         }

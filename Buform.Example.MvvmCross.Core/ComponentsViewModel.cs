@@ -13,7 +13,7 @@ using NLipsum.Core;
 
 namespace Buform.Example.MvvmCross.Core
 {
-    public sealed class ControlsViewModel : MvxNavigationViewModel
+    public sealed class ComponentsViewModel : MvxNavigationViewModel
     {
         public enum Enum
         {
@@ -43,7 +43,7 @@ namespace Buform.Example.MvvmCross.Core
 
         public Form Form { get; }
 
-        public ControlsViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
+        public ComponentsViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
             Color = Color.Gold;
@@ -55,7 +55,7 @@ namespace Buform.Example.MvvmCross.Core
 
             Command = new MvxCommand(Execute);
 
-            Title = "Controls";
+            Title = "Components";
 
             Form = new Form(this)
             {
@@ -71,7 +71,7 @@ namespace Buform.Example.MvvmCross.Core
                     Formatter = item => item.ToWords(),
                     Source = Enumerable.Range(1, 10).ToArray()
                 },
-                new TextFormGroup("Multi-value Pickers")
+                new TextFormGroup("Pickers")
                 {
                     new MultiValuePickerFormItem<int>(() => MultiValuePicker)
                     {
@@ -92,10 +92,7 @@ namespace Buform.Example.MvvmCross.Core
                         ItemFormatter = item => item.ToRoman(),
                         ValueFormatter = value => value?.Humanize() ?? "None",
                         Source = Enumerable.Range(1, 10).ToArray()
-                    }
-                },
-                new TextFormGroup("Pickers")
-                {
+                    },
                     new CallbackPickerFormItem(() => CallbackPicker)
                     {
                         Label = "Callback Picker",
@@ -128,10 +125,7 @@ namespace Buform.Example.MvvmCross.Core
                         InputType = PickerInputType.PopUp,
                         Formatter = item => item?.ToRoman() ?? "None",
                         Source = Enumerable.Range(1, 10).OfType<int?>().ToArray()
-                    }
-                },
-                new TextFormGroup("Async Pickers")
-                {
+                    },
                     new AsyncPickerFormItem<int?>(() => AsyncPicker)
                     {
                         Label = "Async Picker",

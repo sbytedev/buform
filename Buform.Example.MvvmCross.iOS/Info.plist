@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>Buform MvvmCross</string>
+	<string>Buform</string>
 	<key>CFBundleIdentifier</key>
 	<string>dev.sbyte.buform-mvvmcross</string>
 	<key>CFBundleShortVersionString</key>
