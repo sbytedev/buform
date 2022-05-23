@@ -35,10 +35,10 @@ namespace Buform
 
             ContentView.AddConstraints(new[]
             {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, 11),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -11),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, 16),
-                Label.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -16)
+                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
+                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
+                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
+                Label.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right)
             });
         }
 
