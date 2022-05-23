@@ -7,8 +7,20 @@ namespace Buform
     {
         private readonly Func<string?, TValue?> _converter;
 
+        private string? _placeholder;
         private TextInputType _inputType;
         private Func<TValue?, string?>? _formatter;
+
+        public virtual string? Placeholder
+        {
+            get => _placeholder;
+            set
+            {
+                _placeholder = value;
+
+                NotifyPropertyChanged();
+            }
+        }
 
         public virtual TextInputType InputType
         {

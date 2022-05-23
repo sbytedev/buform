@@ -36,7 +36,6 @@
     <!--    Button    -->
 
     <ItemGroup>
-        <Compile Include="FormComponentAttribute.cs" />
         <Compile Include="Button\ButtonFormItem.cs" />
         <Compile Include="Button\ButtonInputType.cs" />
     </ItemGroup>
@@ -49,7 +48,6 @@
     <!--    DateTime    -->
 
     <ItemGroup>
-        <Compile Include="FormComponentRegistry.cs" />
         <Compile Include="DateTime\DateTimeFormItem.cs" />
         <Compile Include="DateTime\DateTimeInputType.cs" />
     </ItemGroup>
@@ -162,6 +160,7 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="Text\FormTextView.cs" />
         <Compile Include="Text\MultilineTextFormCell.cs" />
         <Compile Include="Text\TextFormCell.cs" />
         <Compile Include="Text\TextFormGroupFooter.cs" />
@@ -183,6 +182,8 @@
         <Compile Include="ExpressionExtensions.cs" />
         <Compile Include="Form.cs" />
         <Compile Include="FormCollection.cs" />
+        <Compile Include="FormComponentAttribute.cs" />
+        <Compile Include="FormComponentRegistry.cs" />
         <Compile Include="FormGroup.cs" />
         <Compile Include="FormItem.cs" />
         <Compile Include="FormValueChangedEventArgs.cs" />

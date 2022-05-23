@@ -222,6 +222,9 @@ namespace Buform.Example.MvvmCross.Core
                         IsSecured = true
                     },
                     new MultilineTextFormItem(() => MultilineText)
+                    {
+                        Placeholder = "Multiline text"
+                    }
                 },
                 new TextFormGroup("Sliders")
                 {

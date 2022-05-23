@@ -65,6 +65,9 @@ namespace Buform.Example.MvvmCross.Core
                         InputType = TextInputType.Url
                     },
                     new MultilineTextFormItem(() => model.Notes)
+                    {
+                        Placeholder = "Notes"
+                    }
                 },
             };
         }

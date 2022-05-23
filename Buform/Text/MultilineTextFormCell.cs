@@ -8,7 +8,7 @@ namespace Buform
     [Register(nameof(MultilineTextFormCell))]
     public class MultilineTextFormCell : FormCell<IMultilineTextFormItem>
     {
-        protected virtual UITextView? TextView { get; set; }
+        protected virtual FormTextView? TextView { get; set; }
 
         public MultilineTextFormCell()
         {
@@ -24,32 +24,21 @@ namespace Buform
         {
             SelectionStyle = UITableViewCellSelectionStyle.None;
 
-            TextView = new UITextView
+            TextView = new FormTextView
             {
-                TranslatesAutoresizingMaskIntoConstraints = false,
-                TextContainerInset = UIEdgeInsets.Zero,
-                DataDetectorTypes = UIDataDetectorType.All,
-                Font = UIFont.PreferredBody,
-                TextColor = UIColor.Label
+                TranslatesAutoresizingMaskIntoConstraints = false
             };
-
-            TextView.TextContainer.LineFragmentPadding = 0;
 
             TextView.Changed += OnChanged;
 
             ContentView.AddSubviews(TextView);
 
-            var bottomConstraint = TextView.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom);
-
-            bottomConstraint.Priority = 999;
-
             ContentView.AddConstraints(new[]
             {
                 TextView.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                bottomConstraint,
+                TextView.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
                 TextView.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
-                TextView.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right),
-                TextView.HeightAnchor.ConstraintEqualTo(200)
+                TextView.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right)
             });
         }
 
@@ -71,6 +60,16 @@ namespace Buform
             }
 
             TextView.Editable = !Item?.IsReadOnly ?? true;
+        }
+
+        protected virtual void UpdatePlaceholder()
+        {
+            if (TextView == null)
+            {
+                return;
+            }
+
+            TextView.Placeholder = Item?.Placeholder;
         }
 
         protected virtual void UpdateInputType()
@@ -107,6 +106,7 @@ namespace Buform
         protected override void OnItemSet()
         {
             UpdateReadOnlyState();
+            UpdatePlaceholder();
             UpdateInputType();
             UpdateValue();
         }
@@ -117,6 +117,9 @@ namespace Buform
             {
                 case nameof(Item.IsReadOnly):
                     UpdateReadOnlyState();
+                    break;
+                case nameof(Item.Placeholder):
+                    UpdatePlaceholder();
                     break;
                 case nameof(Item.InputType):
                     UpdateInputType();
