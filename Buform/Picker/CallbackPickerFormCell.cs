@@ -21,6 +21,7 @@ namespace Buform
 
         protected override void OnItemSet()
         {
+            UpdateReadOnlyState();
             UpdateLabel(Item?.Label);
             UpdateValue(Item?.FormattedValue);
             UpdateValidationErrorMessage(Item?.ValidationErrorMessage);
@@ -30,6 +31,9 @@ namespace Buform
         {
             switch (propertyName)
             {
+                case nameof(Item.IsReadOnly):
+                    UpdateReadOnlyState();
+                    break;
                 case nameof(Item.Label):
                     UpdateLabel(Item?.Label);
                     break;

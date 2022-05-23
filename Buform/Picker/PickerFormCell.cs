@@ -88,6 +88,7 @@ namespace Buform
 
         protected override void OnItemSet()
         {
+            UpdateReadOnlyState();
             UpdateLabel(Item?.Label);
             UpdateInputType();
             UpdateValue(Item?.FormattedValue);
@@ -98,6 +99,9 @@ namespace Buform
         {
             switch (propertyName)
             {
+                case nameof(Item.IsReadOnly):
+                    UpdateReadOnlyState();
+                    break;
                 case nameof(Item.Label):
                     UpdateLabel(Item?.Label);
                     break;

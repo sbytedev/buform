@@ -50,7 +50,13 @@ namespace Buform
                 return;
             }
 
-            Label.Enabled = !Item?.IsReadOnly ?? true;
+            var isReadOnly = Item?.IsReadOnly ?? true;
+
+            Label.Enabled = !isReadOnly;
+
+            SelectionStyle = isReadOnly
+                ? UITableViewCellSelectionStyle.None
+                : UITableViewCellSelectionStyle.Default;
         }
 
         protected virtual void UpdateLabel()

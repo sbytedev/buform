@@ -20,7 +20,6 @@ namespace Buform
 
         protected override void Initialize()
         {
-            SelectionStyle = UITableViewCellSelectionStyle.Default;
             Accessory = UITableViewCellAccessory.DisclosureIndicator;
 
             Label = new UILabel
@@ -37,7 +36,7 @@ namespace Buform
                 TextColor = UIColor.SecondaryLabel
             };
 
-            ValueLabel.SetContentCompressionResistancePriority(1000, UILayoutConstraintAxis.Horizontal);
+            ValueLabel.SetContentCompressionResistancePriority((float)UILayoutPriority.Required, UILayoutConstraintAxis.Horizontal);
 
             ContentView.AddSubviews(Label, ValueLabel);
 
@@ -51,6 +50,18 @@ namespace Buform
                 ValueLabel.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 8),
                 ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -8)
             });
+        }
+
+        protected virtual void UpdateReadOnlyState()
+        {
+            if (Label == null)
+            {
+                return;
+            }
+
+            SelectionStyle = Item?.IsReadOnly ?? true
+                ? UITableViewCellSelectionStyle.None
+                : UITableViewCellSelectionStyle.Default;
         }
 
         protected virtual void UpdateLabel(string? text)
