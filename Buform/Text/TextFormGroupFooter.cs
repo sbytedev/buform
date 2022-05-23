@@ -18,13 +18,7 @@ namespace Buform
 
         private void UpdateLabel()
         {
-            var tableView = GetTableView();
-
-            tableView?.BeginUpdates();
-
             TextLabel.Text = Group?.FooterLabel;
-
-            tableView?.EndUpdates();
         }
 
         protected override void OnGroupSet()
