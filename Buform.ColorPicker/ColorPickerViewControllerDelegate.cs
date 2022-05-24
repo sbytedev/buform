@@ -1,8 +1,10 @@
+using Foundation;
 using SByteDev.Xamarin.iOS.Extensions;
 using UIKit;
 
 namespace Buform
 {
+    [Preserve(AllMembers = true)]
     public sealed class ColorPickerViewControllerDelegate : UIColorPickerViewControllerDelegate
     {
         private ColorPickerFormItem? _item;

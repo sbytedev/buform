@@ -14,31 +14,7 @@ namespace Buform
             GroupRegistry = new FormGroupRegistry();
             ItemRegistry = new FormItemRegistry();
 
-            Register();
-
             FormComponentRegistry.Register();
-        }
-
-        private static void Register()
-        {
-            RegisterGroupHeaderClass<TextFormGroup, TextFormGroupHeader>();
-            RegisterGroupFooterClass<TextFormGroup, TextFormGroupFooter>();
-            RegisterGroupHeaderClass<IListFormGroup, ListFormGroupHeader>();
-            RegisterGroupFooterClass<IListFormGroup, ListFormGroupFooter>();
-
-            RegisterItemClass<ButtonFormItem, ButtonFormCell>();
-            RegisterItemClass<DateTimeFormItem, DateTimeFormCell>();
-            RegisterItemClass<IAsyncPickerFormItem, AsyncPickerFormCell>();
-            RegisterItemClass<ICallbackPickerFormItem, CallbackPickerFormCell>();
-            RegisterItemClass<IListFormItem, ListFormCell>();
-            RegisterItemClass<IMultilineTextFormItem, MultilineTextFormCell>();
-            RegisterItemClass<IMultiValuePickerFormItem, MultiValuePickerFormCell>();
-            RegisterItemClass<IPickerFormItem, PickerFormCell>();
-            RegisterItemClass<ISegmentsFormItem, SegmentsFormCell>();
-            RegisterItemClass<ITextFormItem, TextFormCell>();
-            RegisterItemClass<SliderFormItem, SliderFormCell>();
-            RegisterItemClass<StepperFormItem, StepperFormCell>();
-            RegisterItemClass<SwitchFormItem, SwitchFormCell>();
         }
 
         public static void RegisterGroupHeaderClass<TGroup, TGroupView>()

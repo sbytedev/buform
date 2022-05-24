@@ -42,6 +42,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="Button\ButtonFormCell.cs" />
+        <Compile Include="Button\ButtonFormComponentIos.cs" />
     </ItemGroup>
 
 
@@ -53,15 +54,15 @@
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-        <Compile Include="DateTime\DateTimeFormCell.cs" />
         <Compile Include="DateTime\DateTimeExtensions.cs" />
+        <Compile Include="DateTime\DateTimeFormCell.cs" />
+        <Compile Include="DateTime\DateTimeFormComponentIos.cs" />
         <Compile Include="DateTime\NsDateExtensions.cs" />
     </ItemGroup>
 
     <!--    List    -->
 
     <ItemGroup>
-        <Compile Include="IFormComponent.cs" />
         <Compile Include="List\IListFormGroup.cs" />
         <Compile Include="List\IListFormItem.cs" />
         <Compile Include="List\ListFormGroup.cs" />
@@ -70,6 +71,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="List\ListFormCell.cs" />
+        <Compile Include="List\ListFormComponentIos.cs" />
         <Compile Include="List\ListFormGroupFooter.cs" />
         <Compile Include="List\ListFormGroupHeader.cs" />
     </ItemGroup>
@@ -102,6 +104,7 @@
         <Compile Include="Picker\MultiValuePickerFormCell.cs" />
         <Compile Include="Picker\PickerFormCell.cs" />
         <Compile Include="Picker\PickerFormCellBase.cs" />
+        <Compile Include="Picker\PickerFormComponentIos.cs" />
         <Compile Include="Picker\PickerPresenterBase.cs" />
         <Compile Include="Picker\PickerViewController.cs" />
         <Compile Include="Picker\PopUpPickerPresenter.cs" />
@@ -116,6 +119,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="Segments\SegmentsFormCell.cs" />
+        <Compile Include="Segments\SegmentsFormComponentIos.cs" />
     </ItemGroup>
 
     <!--    Slider    -->
@@ -126,6 +130,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="Slider\SliderFormCell.cs" />
+        <Compile Include="Slider\SliderFormComponentIos.cs" />
     </ItemGroup>
 
     <!--    Stepper    -->
@@ -136,6 +141,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="Stepper\StepperFormCell.cs" />
+        <Compile Include="Stepper\StepperFormComponentIos.cs" />
     </ItemGroup>
 
     <!--    Switch    -->
@@ -146,6 +152,7 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="Switch\SwitchFormCell.cs" />
+        <Compile Include="Switch\SwitchFormComponentIos.cs" />
     </ItemGroup>
 
     <!--    Text    -->
@@ -163,6 +170,7 @@
         <Compile Include="Text\FormTextView.cs" />
         <Compile Include="Text\MultilineTextFormCell.cs" />
         <Compile Include="Text\TextFormCell.cs" />
+        <Compile Include="Text\TextFormComponentIos.cs" />
         <Compile Include="Text\TextFormGroupFooter.cs" />
         <Compile Include="Text\TextFormGroupHeader.cs" />
     </ItemGroup>
@@ -188,6 +196,7 @@
         <Compile Include="FormItem.cs" />
         <Compile Include="FormValueChangedEventArgs.cs" />
         <Compile Include="FormViewNotFoundException.cs" />
+        <Compile Include="IFormComponent.cs" />
         <Compile Include="IFormGroup.cs" />
         <Compile Include="IFormItem.cs" />
         <Compile Include="WeakEventSubscription.cs" />

@@ -7,27 +7,26 @@ namespace Buform
     {
         public static void Register()
         {
-            var name = typeof(FormComponentRegistry).Assembly.GetName().Name;
-
+            var assembly = typeof(FormComponentRegistry).Assembly;
             var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var assemblies = allAssemblies.Where(item => item.GetReferencedAssemblies().Any(i => i.Name == name)).ToArray();
+            var name = assembly.GetName().Name;
 
-            foreach (var assembly in assemblies)
+            var assemblies = allAssemblies
+                .Where(item => item.GetReferencedAssemblies().Any(i => i.Name == name))
+                .ToList();
+
+            assemblies.Add(assembly);
+
+            var components = assemblies
+                .SelectMany(item => item.GetTypes())
+                .Where(item => item.GetCustomAttributes(typeof(FormComponentAttribute), false).Any())
+                .Select(item => Activator.CreateInstance(item) as IFormComponent)
+                .ToArray();
+
+            foreach (var component in components)
             {
-                var types = assembly.GetTypes();
-
-                foreach (var type in types)
-                {
-                    if (type.GetCustomAttributes(typeof(FormComponentAttribute), false).Length <= 0)
-                    {
-                        continue;
-                    }
-
-                    var component = Activator.CreateInstance(type) as IFormComponent;
-
-                    component?.Register();
-                }
+                component?.Register();
             }
         }
     }
