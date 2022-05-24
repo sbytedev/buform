@@ -52,20 +52,20 @@ namespace Buform
 
             ContentView.AddSubviews(Label, TextField);
 
-            _textFieldLeadingConstraint = Label.TrailingAnchor.ConstraintEqualTo(TextField.LeadingAnchor, -8);
+            _textFieldLeadingConstraint = Label.TrailingAnchor.ConstraintEqualTo(TextField.LeadingAnchor, -10);
 
             _labelWidthConstraint = Label.WidthAnchor.ConstraintEqualTo(0);
 
             ContentView.AddConstraints(new[]
             {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
+                Label.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                Label.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
+                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.LeadingAnchor),
                 _labelWidthConstraint,
-                TextField.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                TextField.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
+                TextField.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                TextField.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
                 _textFieldLeadingConstraint,
-                TextField.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right)
+                TextField.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor)
             });
         }
 
@@ -105,7 +105,7 @@ namespace Buform
 
             var hasLabel = !string.IsNullOrWhiteSpace(Item?.Label);
 
-            _textFieldLeadingConstraint.Constant = hasLabel ? -8 : 0;
+            _textFieldLeadingConstraint.Constant = hasLabel ? -10 : 0;
             _labelWidthConstraint.Active = !hasLabel;
 
             if (TextField == null)

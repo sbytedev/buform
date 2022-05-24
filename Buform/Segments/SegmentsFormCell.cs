@@ -51,20 +51,20 @@ namespace Buform
 
             ContentView.AddSubviews(Label, SegmentedControl);
 
-            _segmentedControlLeadingConstraint = SegmentedControl.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 8);
+            _segmentedControlLeadingConstraint = SegmentedControl.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 10);
 
             _labelWidthConstraint = Label.WidthAnchor.ConstraintEqualTo(0);
 
             ContentView.AddConstraints(new[]
             {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
+                Label.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                Label.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
+                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.LeadingAnchor),
                 _labelWidthConstraint,
                 SegmentedControl.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, 8),
                 SegmentedControl.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -8),
                 _segmentedControlLeadingConstraint,
-                SegmentedControl.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right)
+                SegmentedControl.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor)
             });
         }
 
@@ -120,7 +120,7 @@ namespace Buform
 
             var hasLabel = !string.IsNullOrWhiteSpace(Item?.Label);
 
-            _segmentedControlLeadingConstraint.Constant = hasLabel ? 8 : 0;
+            _segmentedControlLeadingConstraint.Constant = hasLabel ? 10 : 0;
             _labelWidthConstraint.Active = !hasLabel;
         }
 

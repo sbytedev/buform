@@ -81,21 +81,23 @@ namespace Buform
             return reuseIdentifier!;
         }
 
-        protected override void WillDisplay(NSIndexPath indexPath, UITableViewCell cell, object item)
+        protected override UITableViewCell GetCell(NSIndexPath indexPath, object item)
         {
-            base.WillDisplay(indexPath, cell, item);
+            var cell = base.GetCell(indexPath, item);
 
             if (cell is not FormCell formCell)
             {
-                return;
+                return cell;
             }
 
             if (item is not IFormItem formItem)
             {
-                return;
+                return cell;
             }
 
-            formCell.SetItem(formItem);
+            formCell.Initialize(formItem);
+
+            return cell;
         }
 
         protected override void WillDisplayHeader(nint section, UITableViewHeaderFooterView view, object item)
@@ -112,7 +114,7 @@ namespace Buform
                 return;
             }
 
-            headerFooterView.SetGroup(formGroup);
+            headerFooterView.Initialize(formGroup);
         }
 
         protected override void WillDisplayFooter(nint section, UITableViewHeaderFooterView view, object item)
@@ -129,7 +131,7 @@ namespace Buform
                 return;
             }
 
-            headerFooterView.SetGroup(formGroup);
+            headerFooterView.Initialize(formGroup);
         }
 
         protected override NSIndexPath WillSelectRow(NSIndexPath indexPath, object item)

@@ -37,7 +37,7 @@ namespace Buform
             }
         }
 
-        public abstract void SetGroup(IFormGroup group);
+        public abstract void Initialize(IFormGroup group);
     }
 
     [Preserve(AllMembers = true)]
@@ -75,7 +75,7 @@ namespace Buform
             /* Nothing to do */
         }
 
-        public sealed override void SetGroup(IFormGroup group)
+        public sealed override void Initialize(IFormGroup group)
         {
             if (ReferenceEquals(Group, group))
             {

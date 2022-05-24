@@ -19,7 +19,6 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="cii-Zs-ef4" secondAttribute="bottom" id="4Kl-ZC-SL1"/>
                 <constraint firstItem="cii-Zs-ef4" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="ZjZ-mM-83A"/>

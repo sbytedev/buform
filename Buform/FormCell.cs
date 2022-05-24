@@ -56,7 +56,7 @@ namespace Buform
 
         protected abstract void Initialize();
 
-        public virtual void SetItem(IFormItem item)
+        public virtual void Initialize(IFormItem item)
         {
             if (ReferenceEquals(FormItem, item))
             {
@@ -114,9 +114,9 @@ namespace Buform
 
         protected abstract void OnItemPropertyChanged(string propertyName);
 
-        public override void SetItem(IFormItem item)
+        public override void Initialize(IFormItem item)
         {
-            base.SetItem(item);
+            base.Initialize(item);
 
             if (ReferenceEquals(Item, item))
             {

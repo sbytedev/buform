@@ -45,13 +45,13 @@ namespace Buform
 
             ContentView.AddConstraints(new[]
             {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
+                Label.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                Label.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
+                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.LeadingAnchor),
                 DatePicker.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, 4),
                 DatePicker.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -4),
-                DatePicker.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 8),
-                DatePicker.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -ContentView.LayoutMargins.Right)
+                DatePicker.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 10),
+                DatePicker.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor)
             });
         }
 

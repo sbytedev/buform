@@ -42,13 +42,13 @@ namespace Buform
 
             ContentView.AddConstraints(new[]
             {
-                Label.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                Label.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
-                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LeadingAnchor, ContentView.LayoutMargins.Left),
-                ValueLabel.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor, ContentView.LayoutMargins.Top),
-                ValueLabel.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor, -ContentView.LayoutMargins.Bottom),
-                ValueLabel.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 8),
-                ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -8)
+                Label.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                Label.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
+                Label.LeadingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.LeadingAnchor),
+                ValueLabel.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
+                ValueLabel.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
+                ValueLabel.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 10),
+                ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -10)
             });
         }
 
