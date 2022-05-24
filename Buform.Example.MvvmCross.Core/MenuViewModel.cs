@@ -20,6 +20,7 @@ namespace Buform.Example.MvvmCross.Core
 
             Form = new Form(this)
             {
+                new HeaderFormGroup(),
                 new TextFormGroup("Gallery")
                 {
                     new ButtonFormItem(new MvxAsyncCommand(ShowControlsAsync))

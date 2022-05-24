@@ -123,6 +123,9 @@
 
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
+        <InterfaceDefinition Include="HeaderFormGroupHeader.xib">
+          <DependentUpon>HeaderFormGroupHeader.cs</DependentUpon>
+        </InterfaceDefinition>
     </ItemGroup>
 
     <ItemGroup>
@@ -137,6 +140,7 @@
         <Compile Include="CreateConnectionViewController.cs" />
         <Compile Include="MenuViewController.cs" />
         <Compile Include="Setup.cs" />
+        <Compile Include="HeaderFormGroupHeader.cs" />
     </ItemGroup>
 
     <ItemGroup>
