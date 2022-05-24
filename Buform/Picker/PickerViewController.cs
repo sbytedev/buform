@@ -13,6 +13,8 @@ namespace Buform
     [Preserve(AllMembers = true)]
     public class PickerViewController<TItem> : UITableViewController where TItem : class, IPickerFormItemBase
     {
+        private readonly CGSize _minimumPopUpSize = new(240, 320);
+
         protected TItem? Item { get; private set; }
 
         public override CGSize PreferredContentSize
@@ -50,7 +52,7 @@ namespace Buform
         protected virtual void SetRightBarButtonClearItem()
         {
             NavigationItem.RightBarButtonItem = new UIBarButtonItem(
-                Buform.Texts.Clear,
+                PickerFormComponent.Texts.Clear,
                 UIBarButtonItemStyle.Plain,
                 (_, _) =>
                 {
@@ -149,8 +151,8 @@ namespace Buform
             // ReSharper disable once ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
             if (NavigationController?.PopoverPresentationController != null)
             {
-                PreferredContentSize = TableView.ContentSize.Height < Buform.Picker.MinimumPopUpSize.Height 
-                    ? Buform.Picker.MinimumPopUpSize 
+                PreferredContentSize = TableView.ContentSize.Height < _minimumPopUpSize.Height 
+                    ? _minimumPopUpSize 
                     : TableView.ContentSize;
             }
         }

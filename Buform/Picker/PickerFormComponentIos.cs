@@ -14,5 +14,11 @@ namespace Buform
             Buform.RegisterItemClass<IMultiValuePickerFormItem, MultiValuePickerFormCell>();
             Buform.RegisterItemClass<IPickerFormItem, PickerFormCell>();
         }
+
+        public static class Texts
+        {
+            public static string Clear = "Clear";
+            public static string Cancel = "Cancel";
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace Buform
             if (item.CanBeCleared)
             {
                 var clearAlertAction = UIAlertAction.Create(
-                    Buform.Texts.Clear,
+                    PickerFormComponent.Texts.Clear,
                     UIAlertActionStyle.Destructive,
                     _ => item.Pick(default)
                 );
@@ -58,7 +58,7 @@ namespace Buform
             }
 
             var cancelAlertAction = UIAlertAction.Create(
-                Buform.Texts.Cancel,
+                PickerFormComponent.Texts.Cancel,
                 UIAlertActionStyle.Cancel,
                 null
             );
