@@ -65,9 +65,15 @@ namespace Buform
             OnGroupPropertyChanged(e.PropertyName);
         }
 
-        protected abstract void OnGroupSet();
+        protected virtual void OnGroupSet()
+        {
+            /* Nothing to do */
+        }
 
-        protected abstract void OnGroupPropertyChanged(string propertyName);
+        protected virtual void OnGroupPropertyChanged(string propertyName)
+        {
+            /* Nothing to do */
+        }
 
         public sealed override void SetGroup(IFormGroup group)
         {
