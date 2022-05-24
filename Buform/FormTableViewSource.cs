@@ -53,55 +53,83 @@ namespace Buform
 
         protected override string? GetHeaderReuseIdentifier(object item)
         {
-            if (!Buform.TryGetHeaderReuseIdentifier(item.GetType(), out var reuseIdentifier))
-            {
-                throw new FormViewNotFoundException(item);
-            }
-
-            return reuseIdentifier;
+            return Buform.TryGetHeaderReuseIdentifier(item.GetType(), out var reuseIdentifier) ? reuseIdentifier : null;
         }
 
         protected override string? GetFooterReuseIdentifier(object item)
         {
-            if (!Buform.TryGetFooterReuseIdentifier(item.GetType(), out var reuseIdentifier))
-            {
-                throw new FormViewNotFoundException(item);
-            }
-
-            return reuseIdentifier;
+            return Buform.TryGetFooterReuseIdentifier(item.GetType(), out var reuseIdentifier) ? reuseIdentifier : null;
         }
 
-        protected override string? GetCellReuseIdentifier(object item)
+        protected override string GetCellReuseIdentifier(object item)
         {
             if (!Buform.TryGetReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }
 
-            return reuseIdentifier;
+            return reuseIdentifier!;
         }
 
-        protected override string? GetExpandedCellReuseIdentifier(object item)
+        protected override string GetExpandedCellReuseIdentifier(object item)
         {
             if (!Buform.TryGetExpandedReuseIdentifier(item.GetType(), out var reuseIdentifier))
             {
                 throw new FormViewNotFoundException(item);
             }
 
-            return reuseIdentifier;
+            return reuseIdentifier!;
         }
 
-        protected override void Update(UIView view, object item)
+        protected override void WillDisplay(NSIndexPath indexPath, UITableViewCell cell, object item)
         {
-            switch (itemView: view, item)
+            base.WillDisplay(indexPath, cell, item);
+
+            if (cell is not FormCell formCell)
             {
-                case (FormCell formCell, IFormItem formItem):
-                    formCell.SetItem(formItem);
-                    break;
-                case (FormHeaderFooterView headerFooterView, IFormGroup formGroup):
-                    headerFooterView.SetGroup(formGroup);
-                    break;
+                return;
             }
+
+            if (item is not IFormItem formItem)
+            {
+                return;
+            }
+
+            formCell.SetItem(formItem);
+        }
+
+        protected override void WillDisplayHeader(nint section, UITableViewHeaderFooterView view, object item)
+        {
+            base.WillDisplayHeader(section, view, item);
+
+            if (view is not FormHeaderFooterView headerFooterView)
+            {
+                return;
+            }
+
+            if (item is not IFormGroup formGroup)
+            {
+                return;
+            }
+
+            headerFooterView.SetGroup(formGroup);
+        }
+
+        protected override void WillDisplayFooter(nint section, UITableViewHeaderFooterView view, object item)
+        {
+            base.WillDisplayFooter(section, view, item);
+
+            if (view is not FormHeaderFooterView headerFooterView)
+            {
+                return;
+            }
+
+            if (item is not IFormGroup formGroup)
+            {
+                return;
+            }
+
+            headerFooterView.SetGroup(formGroup);
         }
 
         protected override NSIndexPath WillSelectRow(NSIndexPath indexPath, object item)

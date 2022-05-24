@@ -9,37 +9,40 @@ namespace Buform
     [Preserve(AllMembers = true)]
     public sealed class FormGroupRegistry
     {
-        private enum HolderType
+        private enum RegistrationType
         {
             Class,
             Nib
         }
 
+        private enum HolderType
+        {
+            Header,
+            Footer
+        }
+
         private sealed class Holder
         {
-            public Type HeaderType { get; }
-            public Type FooterType { get; }
+            public Type ViewType { get; }
+            public RegistrationType RegistrationType { get; }
 
-            public HolderType Type { get; }
-
-            public Holder(Type headerType, Type footerType, HolderType type)
+            public Holder(Type viewType, RegistrationType registrationType)
             {
-                HeaderType = headerType ?? throw new ArgumentNullException(nameof(headerType));
-                FooterType = footerType ?? throw new ArgumentNullException(nameof(footerType));
-                Type = type;
+                ViewType = viewType ?? throw new ArgumentNullException(nameof(viewType));
+                RegistrationType = registrationType;
             }
         }
 
-        private readonly IDictionary<Type, Holder> _holders;
+        private readonly IDictionary<(Type, HolderType), Holder> _holders;
 
         public FormGroupRegistry()
         {
-            _holders = new Dictionary<Type, Holder>();
+            _holders = new Dictionary<(Type, HolderType), Holder>();
         }
 
-        private bool TryGetHolder(Type groupType, out Holder? holder)
+        private bool TryGetHolder(Type groupType, HolderType holderType, out Holder? holder)
         {
-            if (_holders.TryGetValue(groupType, out holder))
+            if (_holders.TryGetValue((groupType, holderType), out holder))
             {
                 return true;
             }
@@ -50,7 +53,7 @@ namespace Buform
 
             foreach (var interfaceType in interfaceTypes)
             {
-                if (_holders.TryGetValue(interfaceType, out holder))
+                if (_holders.TryGetValue((interfaceType, holderType), out holder))
                 {
                     return true;
                 }
@@ -59,27 +62,43 @@ namespace Buform
             return false;
         }
 
-        public void RegisterHeaderClass<TGroup, TGroupHeader, TGroupFooter>()
+        public void RegisterGroupHeaderClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupHeader : FormHeaderFooter<TGroup>
-            where TGroupFooter : FormHeaderFooter<TGroup>
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            _holders[typeof(TGroup)] = new Holder(
-                typeof(TGroupHeader),
-                typeof(TGroupFooter),
-                HolderType.Class
+            _holders[(typeof(TGroup), HolderType.Header)] = new Holder(
+                typeof(TGroupView),
+                RegistrationType.Class
             );
         }
 
-        public void RegisterHeaderNib<TGroup, TGroupHeader, TGroupFooter>()
+        public void RegisterGroupFooterClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupHeader : FormHeaderFooter<TGroup>
-            where TGroupFooter : FormHeaderFooter<TGroup>
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            _holders[typeof(TGroup)] = new Holder(
-                typeof(TGroupHeader),
-                typeof(TGroupFooter),
-                HolderType.Nib
+            _holders[(typeof(TGroup), HolderType.Footer)] = new Holder(
+                typeof(TGroupView),
+                RegistrationType.Class
+            );
+        }
+
+        public void RegisterGroupHeaderNib<TGroup, TGroupView>()
+            where TGroup : class, IFormGroup
+            where TGroupView : FormHeaderFooter<TGroup>
+        {
+            _holders[(typeof(TGroup), HolderType.Header)] = new Holder(
+                typeof(TGroupView),
+                RegistrationType.Nib
+            );
+        }
+
+        public void RegisterGroupFooterNib<TGroup, TGroupView>()
+            where TGroup : class, IFormGroup
+            where TGroupView : FormHeaderFooter<TGroup>
+        {
+            _holders[(typeof(TGroup), HolderType.Footer)] = new Holder(
+                typeof(TGroupView),
+                RegistrationType.Nib
             );
         }
 
@@ -92,20 +111,15 @@ namespace Buform
 
             foreach (var holder in _holders.Values)
             {
-                switch(holder.Type)
+                switch(holder.RegistrationType)
                 {
-                    case HolderType.Class:
-                        tableView.RegisterClassForHeaderFooterViewReuse(holder.HeaderType, holder.HeaderType.Name);
-                        tableView.RegisterClassForHeaderFooterViewReuse(holder.FooterType, holder.FooterType.Name);
+                    case RegistrationType.Class:
+                        tableView.RegisterClassForHeaderFooterViewReuse(holder.ViewType, holder.ViewType.Name);
                         break;
-                    case HolderType.Nib:
+                    case RegistrationType.Nib:
                         tableView.RegisterNibForHeaderFooterViewReuse(
-                            UINib.FromName(holder.HeaderType.Name, NSBundle.MainBundle),
-                            holder.HeaderType.Name
-                        );
-                        tableView.RegisterNibForHeaderFooterViewReuse(
-                            UINib.FromName(holder.FooterType.Name, NSBundle.MainBundle),
-                            holder.FooterType.Name
+                            UINib.FromName(holder.ViewType.Name, NSBundle.MainBundle),
+                            holder.ViewType.Name
                         );
                         break;
                     default:
@@ -121,11 +135,11 @@ namespace Buform
                 throw new ArgumentNullException(nameof(groupType));
             }
 
-            var result = TryGetHolder(groupType, out var holder);
+            var result = TryGetHolder(groupType, HolderType.Header, out var holder);
 
             if (result)
             {
-                reuseIdentifier = holder!.HeaderType.Name;
+                reuseIdentifier = holder!.ViewType.Name;
 
                 return true;
             }
@@ -142,11 +156,11 @@ namespace Buform
                 throw new ArgumentNullException(nameof(groupType));
             }
 
-            var result = TryGetHolder(groupType, out var holder);
+            var result = TryGetHolder(groupType, HolderType.Footer, out var holder);
 
             if (result)
             {
-                reuseIdentifier = holder!.FooterType.Name;
+                reuseIdentifier = holder!.ViewType.Name;
 
                 return true;
             }

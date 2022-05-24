@@ -21,68 +21,66 @@ namespace Buform
 
         private static void Register()
         {
-            RegisterHeaderClass<TextFormGroup, TextFormGroupHeader, TextFormGroupFooter>();
-            RegisterHeaderClass<IListFormGroup, ListFormGroupHeader, ListFormGroupFooter>();
+            RegisterGroupHeaderClass<TextFormGroup, TextFormGroupHeader>();
+            RegisterGroupFooterClass<TextFormGroup, TextFormGroupFooter>();
+            RegisterGroupHeaderClass<IListFormGroup, ListFormGroupHeader>();
+            RegisterGroupFooterClass<IListFormGroup, ListFormGroupFooter>();
 
-            RegisterClass<ButtonFormItem, ButtonFormCell>();
-            RegisterClass<DateTimeFormItem, DateTimeFormCell>();
-            RegisterClass<IAsyncPickerFormItem, AsyncPickerFormCell>();
-            RegisterClass<ICallbackPickerFormItem, CallbackPickerFormCell>();
-            RegisterClass<IListFormItem, ListFormCell>();
-            RegisterClass<IMultilineTextFormItem, MultilineTextFormCell>();
-            RegisterClass<IMultiValuePickerFormItem, MultiValuePickerFormCell>();
-            RegisterClass<IPickerFormItem, PickerFormCell>();
-            RegisterClass<ISegmentsFormItem, SegmentsFormCell>();
-            RegisterClass<ITextFormItem, TextFormCell>();
-            RegisterClass<SliderFormItem, SliderFormCell>();
-            RegisterClass<StepperFormItem, StepperFormCell>();
-            RegisterClass<SwitchFormItem, SwitchFormCell>();
+            RegisterItemClass<ButtonFormItem, ButtonFormCell>();
+            RegisterItemClass<DateTimeFormItem, DateTimeFormCell>();
+            RegisterItemClass<IAsyncPickerFormItem, AsyncPickerFormCell>();
+            RegisterItemClass<ICallbackPickerFormItem, CallbackPickerFormCell>();
+            RegisterItemClass<IListFormItem, ListFormCell>();
+            RegisterItemClass<IMultilineTextFormItem, MultilineTextFormCell>();
+            RegisterItemClass<IMultiValuePickerFormItem, MultiValuePickerFormCell>();
+            RegisterItemClass<IPickerFormItem, PickerFormCell>();
+            RegisterItemClass<ISegmentsFormItem, SegmentsFormCell>();
+            RegisterItemClass<ITextFormItem, TextFormCell>();
+            RegisterItemClass<SliderFormItem, SliderFormCell>();
+            RegisterItemClass<StepperFormItem, StepperFormCell>();
+            RegisterItemClass<SwitchFormItem, SwitchFormCell>();
         }
 
-        public static void RegisterHeaderClass<TGroup, TGroupHeader, TGroupFooter>()
+        public static void RegisterGroupHeaderClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupHeader : FormHeaderFooter<TGroup>
-            where TGroupFooter : FormHeaderFooter<TGroup>
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            GroupRegistry.RegisterHeaderClass<TGroup, TGroupHeader, TGroupFooter>();
+            GroupRegistry.RegisterGroupHeaderClass<TGroup, TGroupView>();
         }
 
-        public static void RegisterHeaderNib<TGroup, TGroupHeader, TGroupFooter>()
+        public static void RegisterGroupFooterClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupHeader : FormHeaderFooter<TGroup>
-            where TGroupFooter : FormHeaderFooter<TGroup>
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            GroupRegistry.RegisterHeaderNib<TGroup, TGroupHeader, TGroupFooter>();
-        }
-        
-        public static void RegisterClass<TItem, TItemView>()
-            where TItem : class, IFormItem
-            where TItemView : FormCell<TItem>
-        {
-            ItemRegistry.RegisterClass<TItem, TItemView>();
+            GroupRegistry.RegisterGroupFooterClass<TGroup, TGroupView>();
         }
 
-        public static void RegisterClass<TItem, TItemView, TExpandedItemView>()
-            where TItem : class, IFormItem
-            where TItemView : FormCell<TItem>
-            where TExpandedItemView : FormCell<TItem>
+        public static void RegisterGroupHeaderNib<TGroup, TGroupView>()
+            where TGroup : class, IFormGroup
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            ItemRegistry.RegisterClass<TItem, TItemView, TExpandedItemView>();
+            GroupRegistry.RegisterGroupHeaderNib<TGroup, TGroupView>();
         }
 
-        public static void RegisterNib<TItem, TItemView>()
-            where TItem : class, IFormItem
-            where TItemView : FormCell<TItem>
+        public static void RegisterGroupFooterNib<TGroup, TGroupView>()
+            where TGroup : class, IFormGroup
+            where TGroupView : FormHeaderFooter<TGroup>
         {
-            ItemRegistry.RegisterNib<TItem, TItemView>();
+            GroupRegistry.RegisterGroupFooterNib<TGroup, TGroupView>();
         }
 
-        public static void RegisterNib<TItem, TItemView, TExpandedItemView>()
+        public static void RegisterItemClass<TItem, TItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
-            where TExpandedItemView : FormCell<TItem>
         {
-            ItemRegistry.RegisterNib<TItem, TItemView, TExpandedItemView>();
+            ItemRegistry.RegisterItemClass<TItem, TItemView>();
+        }
+
+        public static void RegisterItemNib<TItem, TItemView>()
+            where TItem : class, IFormItem
+            where TItemView : FormCell<TItem>
+        {
+            ItemRegistry.RegisterItemNib<TItem, TItemView>();
         }
 
         public static void Register(UITableView tableView)

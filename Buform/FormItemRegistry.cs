@@ -9,7 +9,7 @@ namespace Buform
     [Preserve(AllMembers = true)]
     public sealed class FormItemRegistry
     {
-        private enum HolderType
+        private enum RegistrationType
         {
             Class,
             Nib
@@ -20,13 +20,13 @@ namespace Buform
             public Type CellType { get; }
             public Type? ExpandedCellType { get; }
 
-            public HolderType Type { get; }
+            public RegistrationType RegistrationType { get; }
 
-            public Holder(Type cellType, Type? expandedCellType, HolderType type)
+            public Holder(Type cellType, Type? expandedCellType, RegistrationType registrationType)
             {
                 CellType = cellType ?? throw new ArgumentNullException(nameof(cellType));
                 ExpandedCellType = expandedCellType;
-                Type = type;
+                RegistrationType = registrationType;
             }
         }
 
@@ -59,18 +59,18 @@ namespace Buform
             return false;
         }
 
-        public void RegisterClass<TItem, TItemView>()
+        public void RegisterItemClass<TItem, TItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
         {
             _holders[typeof(TItem)] = new Holder(
                 typeof(TItemView),
                 null,
-                HolderType.Class
+                RegistrationType.Class
             );
         }
 
-        public void RegisterClass<TItem, TItemView, TExpandedItemView>()
+        public void RegisterItemClass<TItem, TItemView, TExpandedItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
             where TExpandedItemView : FormCell<TItem>
@@ -78,22 +78,22 @@ namespace Buform
             _holders[typeof(TItem)] = new Holder(
                 typeof(TItemView),
                 typeof(TExpandedItemView),
-                HolderType.Class
+                RegistrationType.Class
             );
         }
 
-        public void RegisterNib<TItem, TItemView>()
+        public void RegisterItemNib<TItem, TItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
         {
             _holders[typeof(TItem)] = new Holder(
                 typeof(TItemView),
                 null,
-                HolderType.Nib
+                RegistrationType.Nib
             );
         }
 
-        public void RegisterNib<TItem, TItemView, TExpandedItemView>()
+        public void RegisterItemNib<TItem, TItemView, TExpandedItemView>()
             where TItem : class, IFormItem
             where TItemView : FormCell<TItem>
             where TExpandedItemView : FormCell<TItem>
@@ -101,7 +101,7 @@ namespace Buform
             _holders[typeof(TItem)] = new Holder(
                 typeof(TItemView),
                 typeof(TExpandedItemView),
-                HolderType.Nib
+                RegistrationType.Nib
             );
         }
 
@@ -114,16 +114,16 @@ namespace Buform
 
             foreach (var holder in _holders.Values)
             {
-                switch(holder.Type)
+                switch(holder.RegistrationType)
                 {
-                    case HolderType.Class:
+                    case RegistrationType.Class:
                         tableView.RegisterClassForCellReuse(holder.CellType, holder.CellType.Name);
                         if (holder.ExpandedCellType != null)
                         {
                             tableView.RegisterClassForCellReuse(holder.ExpandedCellType, holder.ExpandedCellType.Name);
                         }
                         break;
-                    case HolderType.Nib:
+                    case RegistrationType.Nib:
                         tableView.RegisterNibForCellReuse(
                             UINib.FromName(holder.CellType.Name, NSBundle.MainBundle),
                             holder.CellType.Name

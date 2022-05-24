@@ -6,7 +6,7 @@ namespace Buform
     {
         public void Register()
         {
-            Buform.RegisterClass<ColorPickerFormItem, ColorPickerFormCell>();
+            Buform.RegisterItemClass<ColorPickerFormItem, ColorPickerFormCell>();
         }
     }
 }

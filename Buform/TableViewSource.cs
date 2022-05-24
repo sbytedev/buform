@@ -377,12 +377,12 @@ namespace Buform
                 : NSIndexPath.FromRowSection(indexPath.Row - shift, indexPath.Section);
         }
 
-        protected virtual string? GetCellReuseIdentifier(object item)
+        protected virtual string GetCellReuseIdentifier(object item)
         {
             return item.GetType().Name;
         }
         
-        protected virtual string? GetExpandedCellReuseIdentifier(object item)
+        protected virtual string GetExpandedCellReuseIdentifier(object item)
         {
             return item.GetType().Name;
         }
@@ -406,8 +406,6 @@ namespace Buform
         {
             return sectionItem;
         }
-
-        protected abstract void Update(UIView view, object item);
 
         private void ResetExpandableCells()
         {
@@ -547,7 +545,12 @@ namespace Buform
                 throw new InvalidOperationException($"Can not get item for index path {indexPath}.");
             }
 
-            Update(cell, item);
+            WillDisplay(indexPath, cell, item);
+        }
+
+        protected virtual void WillDisplay(NSIndexPath indexPath, UITableViewCell cell, object item)
+        {
+            /* Nothing to do */
         }
 
         public sealed override bool CanEditRow(UITableView tableView, NSIndexPath indexPath)
@@ -678,7 +681,7 @@ namespace Buform
             {
                 throw new InvalidOperationException($"Can not get section item for section {section}.");
             }
-            
+
             var headerSectionItem = GetHeaderSectionItem(section, sectionItem);
 
             return GetViewForHeader(section, headerSectionItem)!;
@@ -687,14 +690,25 @@ namespace Buform
         protected virtual UITableViewHeaderFooterView? GetViewForHeader(nint section, object sectionItem)
         {
             var reuseIdentifier = GetHeaderReuseIdentifier(sectionItem);
+
+            if (reuseIdentifier == null)
+            {
+                return null;
+            }
+
             var headerView = TableView.DequeueReusableHeaderFooterView(reuseIdentifier);
 
             if (headerView != null)
             {
-                Update(headerView, sectionItem);
+                WillDisplayHeader(section, headerView, sectionItem);
             }
 
             return headerView;
+        }
+
+        protected virtual void WillDisplayHeader(nint section, UITableViewHeaderFooterView view, object item)
+        {
+            /* Nothing to do */
         }
 
         public sealed override UIView GetViewForFooter(UITableView tableView, nint section)
@@ -714,14 +728,25 @@ namespace Buform
         protected virtual UITableViewHeaderFooterView? GetViewForFooter(nint section, object sectionItem)
         {
             var reuseIdentifier = GetFooterReuseIdentifier(sectionItem);
+
+            if (reuseIdentifier == null)
+            {
+                return null;
+            }
+ 
             var footerView = TableView.DequeueReusableHeaderFooterView(reuseIdentifier);
 
             if (footerView != null)
             {
-                Update(footerView, sectionItem);
+                WillDisplayFooter(section, footerView, sectionItem);
             }
 
             return footerView;
+        }
+
+        protected virtual void WillDisplayFooter(nint section, UITableViewHeaderFooterView view, object item)
+        {
+            /* Nothing to do */
         }
 
         public sealed override string TitleForHeader(UITableView tableView, nint section)
