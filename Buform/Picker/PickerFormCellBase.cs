@@ -48,7 +48,7 @@ namespace Buform
                 ValueLabel.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
                 ValueLabel.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
                 ValueLabel.LeadingAnchor.ConstraintEqualTo(Label.TrailingAnchor, 10),
-                ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.TrailingAnchor, -10)
+                ValueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor)
             });
         }
 
