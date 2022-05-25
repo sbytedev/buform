@@ -33,10 +33,9 @@ namespace Buform
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 Font = UIFont.PreferredBody,
-                TextColor = UIColor.SecondaryLabel
+                TextColor = UIColor.SecondaryLabel,
+                TextAlignment = UITextAlignment.Right
             };
-
-            ValueLabel.SetContentCompressionResistancePriority((float)UILayoutPriority.Required, UILayoutConstraintAxis.Horizontal);
 
             ContentView.AddSubviews(Label, ValueLabel);
 

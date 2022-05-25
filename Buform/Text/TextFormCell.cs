@@ -41,14 +41,11 @@ namespace Buform
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
                 Font = UIFont.PreferredBody,
+                TextAlignment = UITextAlignment.Right,
                 ClearButtonMode = UITextFieldViewMode.WhileEditing
             };
 
             TextField.EditingChanged += OnEditingChanged;
-
-            Label.SetContentHuggingPriority(1000, UILayoutConstraintAxis.Horizontal);
-
-            TextField.SetContentCompressionResistancePriority(1000, UILayoutConstraintAxis.Horizontal);
 
             ContentView.AddSubviews(Label, TextField);
 
