@@ -11,7 +11,7 @@ namespace Buform
         private Func<TValue?, string?>? _formatter;
         private IEnumerable<TValue>? _source;
 
-        IEnumerable<IListFormItem> ISegmentsFormItem.Items => Items;
+        IEnumerable<ISegmentsOptionFormItem> ISegmentsFormItem.Items => Items;
 
         public virtual string? Label
         {
@@ -47,23 +47,23 @@ namespace Buform
             {
                 _source = value;
 
-                Items = _source?.Select(CreateItem) ?? Array.Empty<ListFormItem<TValue>>();
+                Items = _source?.Select(CreateItem) ?? Array.Empty<SegmentsOptionFormItem<TValue>>();
 
                 NotifyPropertyChanged(nameof(Source));
                 NotifyPropertyChanged(nameof(Items));
             }
         }
 
-        public virtual IEnumerable<ListFormItem<TValue>> Items { get; private set; }
+        public virtual IEnumerable<SegmentsOptionFormItem<TValue>> Items { get; private set; }
 
         public SegmentsFormItem(Expression<Func<TValue>> targetProperty) : base(targetProperty)
         {
-            Items = Array.Empty<ListFormItem<TValue>>();
+            Items = Array.Empty<SegmentsOptionFormItem<TValue>>();
         }
 
-        protected virtual ListFormItem<TValue> CreateItem(TValue value)
+        protected virtual SegmentsOptionFormItem<TValue> CreateItem(TValue value)
         {
-            return new ListFormItem<TValue>(value)
+            return new SegmentsOptionFormItem<TValue>(value)
             {
                 Formatter = Formatter
             };

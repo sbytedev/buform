@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
-using SByteDev.Common.Extensions;
 using UIKit;
 
 namespace Buform
@@ -14,7 +13,7 @@ namespace Buform
         private NSLayoutConstraint? _segmentedControlLeadingConstraint;
         private NSLayoutConstraint? _labelWidthConstraint;
 
-        private IEnumerable<IListFormItem> _items = Array.Empty<IListFormItem>();
+        private List<ISegmentsOptionFormItem> _items = new();
 
         protected virtual UILabel? Label { get; set; }
         protected virtual UISegmentedControl? SegmentedControl { get; set; }
@@ -131,15 +130,13 @@ namespace Buform
                 return;
             }
 
-            _items = Item?.Items ?? Array.Empty<IListFormItem>();
+            _items = Item?.Items.ToList() ?? new List<ISegmentsOptionFormItem>();
 
             SegmentedControl.RemoveAllSegments();
 
-            var items = _items as IListFormItem[] ?? _items.ToArray();
-
-            for (var index = 0; index < items.Length; index++)
+            for (var index = 0; index < _items.Count; index++)
             {
-                var value = items[index];
+                var value = _items[index];
 
                 SegmentedControl.InsertSegment(value.FormattedValue ?? string.Empty, index, false);
             }
@@ -158,11 +155,9 @@ namespace Buform
             }
             else
             {
-                var holder = _items.FirstOrDefault(item => Equals(item.Value, Item.Value));
+                var index = _items.FindIndex(item => Equals(item.Value, Item.Value));
 
-                SegmentedControl.SelectedSegment = holder == null 
-                    ? nint.MinValue 
-                    : _items.IndexOf(holder);
+                SegmentedControl.SelectedSegment = index;
             }
         }
 

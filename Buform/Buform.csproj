@@ -114,6 +114,7 @@
 
     <ItemGroup>
         <Compile Include="Segments\ISegmentsFormItem.cs" />
+        <Compile Include="Segments\ISegmentsOptionFormItem.cs" />
         <Compile Include="Segments\SegmentsFormItem.cs" />
     </ItemGroup>
 
@@ -125,6 +126,7 @@
     <!--    Slider    -->
 
     <ItemGroup>
+        <Compile Include="Segments\SegmentsOptionFormItem.cs" />
         <Compile Include="Slider\SliderFormItem.cs" />
     </ItemGroup>
 

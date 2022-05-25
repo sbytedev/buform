@@ -6,6 +6,6 @@ namespace Buform
     {
         string? Label { get; }
 
-        IEnumerable<IListFormItem> Items { get; }
+        IEnumerable<ISegmentsOptionFormItem> Items { get; }
     }
 }
