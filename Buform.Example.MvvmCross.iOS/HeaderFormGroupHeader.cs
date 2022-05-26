@@ -1,5 +1,5 @@
 ﻿using System;
-using Buform.Example.MvvmCross.Core;
+using Buform.Example.Core;
 using Foundation;
 
 namespace Buform.Example.MvvmCross.iOS

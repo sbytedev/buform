@@ -1,4 +1,4 @@
-﻿using Buform.Example.MvvmCross.Core;
+﻿using Buform.Example.Core;
 using Foundation;
 using MvvmCross.Platforms.Ios.Core;
 using UIKit;

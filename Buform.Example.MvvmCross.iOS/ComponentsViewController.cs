@@ -1,4 +1,4 @@
-using Buform.Example.MvvmCross.Core;
+using Buform.Example.Core;
 using MvvmCross;
 using MvvmCross.Platforms.Ios.Presenters.Attributes;
 using MvvmCross.Platforms.Ios.Views;

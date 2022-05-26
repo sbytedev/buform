@@ -160,7 +160,7 @@
         <ProjectReference Include="..\Buform.ColorPicker\Buform.ColorPicker.csproj" />
         <ProjectReference Include="..\Buform.FluentValidation\Buform.FluentValidation.csproj" />
         <ProjectReference Include="..\Buform\Buform.csproj" />
-        <ProjectReference Include="..\Buform.Example.MvvmCross.Core\Buform.Example.MvvmCross.Core.csproj" />
+        <ProjectReference Include="..\Buform.Example.Core\Buform.Example.Core.csproj" />
     </ItemGroup>
 
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

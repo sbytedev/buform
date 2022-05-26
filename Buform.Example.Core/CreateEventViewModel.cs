@@ -9,7 +9,7 @@ using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 
-namespace Buform.Example.MvvmCross.Core
+namespace Buform.Example.Core
 {
     public sealed class CreateEventViewModel : MvxNavigationViewModel
     {

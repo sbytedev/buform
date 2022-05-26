@@ -8,7 +8,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using SByteDev.MvvmCross.Extensions;
 
-namespace Buform.Example.MvvmCross.Core
+namespace Buform.Example.Core
 {
     public sealed class CreateConnectionViewModel : MvxNavigationViewModel
     {

@@ -11,7 +11,7 @@ using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using NLipsum.Core;
 
-namespace Buform.Example.MvvmCross.Core
+namespace Buform.Example.Core
 {
     public sealed class ComponentsViewModel : MvxNavigationViewModel
     {

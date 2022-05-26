@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Buform.Example.MvvmCross.Core
+namespace Buform.Example.Core
 {
     public sealed class CreateConnectionViewModelValidator : AbstractValidator<CreateConnectionViewModel>
     {
