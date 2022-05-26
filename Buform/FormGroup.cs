@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Buform
 {
     public abstract class FormGroup<TFormItem> : FormCollection<TFormItem>, IFormGroup where TFormItem : IFormItem
     {
+        private readonly IDictionary<TFormItem, int> _hiddenItems = new Dictionary<TFormItem, int>();
+
         IEnumerator<IFormItem> IEnumerable<IFormItem>.GetEnumerator()
         {
             return (IEnumerator<IFormItem>)base.GetEnumerator();
@@ -14,18 +18,72 @@ namespace Buform
             NotifyValueChanged(e);
         }
 
+        protected virtual void OnItemVisibilityChanged(object sender, EventArgs e)
+        {
+            if (sender is not TFormItem item)
+            {
+                return;
+            }
+
+            if (item.IsVisible)
+            {
+                if (!_hiddenItems.TryGetValue(item, out var index))
+                {
+                    return;
+                }
+
+                _hiddenItems.Remove(item);
+
+                item.VisibilityChanged -= OnItemVisibilityChanged;
+
+                InsertItem(index, item);
+            }
+            else
+            {
+                var index = IndexOf(item);
+
+                if (index < 0)
+                {
+                    return;
+                }
+
+                _hiddenItems[item] = index;
+
+                RemoveItem(index);
+
+                item.VisibilityChanged += OnItemVisibilityChanged;
+            }
+        }
+        
+        protected virtual void ShiftHiddenItems(int index, int shift)
+        {
+            foreach (var hiddenItem in _hiddenItems)
+            {
+                if (hiddenItem.Value > index)
+                {
+                    _hiddenItems[hiddenItem.Key] = hiddenItem.Value + shift;
+                }
+            }
+        }
+
         protected override void InsertItem(int index, TFormItem item)
         {
+            ShiftHiddenItems(index, 1);
+
             base.InsertItem(index, item);
 
             item.ValueChanged += OnItemValueChanged;
+            item.VisibilityChanged += OnItemVisibilityChanged;
         }
 
         protected override void SetItem(int index, TFormItem item)
         {
+            ShiftHiddenItems(index, 1);
+            
             base.SetItem(index, item);
 
             item.ValueChanged += OnItemValueChanged;
+            item.VisibilityChanged += OnItemVisibilityChanged;
         }
 
         protected override void RemoveItem(int index)
@@ -33,6 +91,9 @@ namespace Buform
             var item = this[index];
 
             item.ValueChanged -= OnItemValueChanged;
+            item.VisibilityChanged -= OnItemVisibilityChanged;
+
+            ShiftHiddenItems(index, -1);
 
             base.RemoveItem(index);
         }
@@ -42,9 +103,26 @@ namespace Buform
             foreach (var item in this)
             {
                 item.ValueChanged -= OnItemValueChanged;
+                item.VisibilityChanged -= OnItemVisibilityChanged;
+                item.Dispose();
             }
 
+            foreach (var item in _hiddenItems.Keys)
+            {
+                item.ValueChanged -= OnItemValueChanged;
+                item.VisibilityChanged -= OnItemVisibilityChanged;
+                item.Dispose();
+            }
+
+            _hiddenItems.Clear();
+
             base.ClearItems();
+        }
+
+        public virtual IFormItem? GetItem(string propertyName)
+        {
+            return this.FirstOrDefault<IFormItem>(item => item.PropertyName == propertyName) ??
+                   _hiddenItems.Keys.FirstOrDefault(item => item.PropertyName == propertyName);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -54,6 +132,14 @@ namespace Buform
                 foreach (var item in this)
                 {
                     item.ValueChanged -= OnItemValueChanged;
+                    item.VisibilityChanged -= OnItemVisibilityChanged;
+                    item.Dispose();
+                }
+
+                foreach (var item in _hiddenItems.Keys)
+                {
+                    item.ValueChanged -= OnItemValueChanged;
+                    item.VisibilityChanged -= OnItemVisibilityChanged;
                     item.Dispose();
                 }
             }

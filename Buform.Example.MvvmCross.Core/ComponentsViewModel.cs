@@ -176,7 +176,7 @@ namespace Buform.Example.MvvmCross.Core
                     new SegmentsFormItem<Enum>(() => Segments)
                     {
                         Label = "Segments",
-                        Source = new []{ Enum.First, Enum.Second, Enum.Third }
+                        Source = System.Enum.GetValues(typeof(Enum)).OfType<Enum>()
                     }
                 },
                 new TextFormGroup("Texts")

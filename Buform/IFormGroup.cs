@@ -8,5 +8,7 @@ namespace Buform
     public interface IFormGroup : IEnumerable<IFormItem>, INotifyCollectionChanged, INotifyPropertyChanged, IDisposable
     {
         event EventHandler<FormValueChangedEventArgs>? ValueChanged;
+
+        IFormItem? GetItem(string propertyName);
     }
 }

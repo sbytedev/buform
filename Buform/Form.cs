@@ -9,7 +9,9 @@ namespace Buform
     {
         private bool _isReadOnly;
 
-        public virtual IFormItem? this[Expression<Func<object?>> targetProperty] => GetItem<IFormItem>(targetProperty);
+        public virtual IFormItem? this[Expression<Func<object?>> property] => GetItem(property);
+
+        public virtual IFormItem? this[string propertyName] => GetItem(propertyName);
 
         protected virtual object? Target { get; private set; }
 
@@ -101,19 +103,24 @@ namespace Buform
             base.ClearItems();
         }
 
-        public virtual TItem? GetItem<TItem>(Expression<Func<object?>> targetProperty) where TItem : class, IFormItem
+        public virtual TItem? GetItem<TItem>(Expression<Func<object?>> property) where TItem : class, IFormItem
         {
-            var targetPropertyName = targetProperty.GetMemberName();
-
-            return GetItem<TItem>(targetPropertyName);
+            return GetItem<TItem>(property.GetMemberName());
         }
 
-        public virtual TItem? GetItem<TItem>(string targetPropertyName) where TItem : class, IFormItem
+        public virtual IFormItem? GetItem(Expression<Func<object?>> property)
         {
-            var item = this.SelectMany(item => item)
-                .FirstOrDefault(item => item.PropertyName == targetPropertyName);
+            return GetItem(property.GetMemberName());
+        }
 
-            return item as TItem;
+        public virtual TItem? GetItem<TItem>(string propertyName) where TItem : class, IFormItem
+        {
+            return GetItem(propertyName) as TItem;
+        }
+        
+        public virtual IFormItem? GetItem(string propertyName)
+        {
+            return this.Select(item => item.GetItem(propertyName)).FirstOrDefault(item => item != null);
         }
 
         protected override void Dispose(bool isDisposing)

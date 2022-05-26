@@ -1,6 +1,9 @@
+using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Humanizer;
 using Microsoft.Extensions.Logging;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -44,7 +47,16 @@ namespace Buform.Example.MvvmCross.Core
                 {
                     new SwitchFormItem(() => model.IsAllDay)
                     {
-                        Label = "All-day"
+                        Label = "All-day",
+                        ValueChangedCallback = (form, value) =>
+                        {
+                            var inputType = value ? DateTimeInputType.Date : DateTimeInputType.DateTime;
+
+                            form.GetItem<DateTimeFormItem>(() => model.StartsAt)!.InputType = inputType;
+                            form.GetItem<DateTimeFormItem>(() => model.EndsAt)!.InputType = inputType;
+
+                            form.GetItem(() => model.TravelTime)!.IsVisible = !value;
+                        }
                     },
                     new DateTimeFormItem(() => model.StartsAt)
                     {
@@ -55,6 +67,25 @@ namespace Buform.Example.MvvmCross.Core
                     {
                         Label = "Ends",
                         InputType = DateTimeInputType.DateTime
+                    },
+                    new PickerFormItem<CreateEventModel.RepeatType>(() => model.Repeat)
+                    {
+                        Label = "Repeat",
+                        Source = Enum.GetValues(typeof(CreateEventModel.RepeatType)).OfType<CreateEventModel.RepeatType>(),
+                        Formatter = item => item.Humanize(LetterCasing.Title)
+                    },
+                    new PickerFormItem<CreateEventModel.TravelTimeType>(() => model.TravelTime)
+                    {
+                        Label = "Travel Time",
+                        Source = Enum.GetValues(typeof(CreateEventModel.TravelTimeType)).OfType<CreateEventModel.TravelTimeType>(),
+                        Formatter = item => item.Humanize(LetterCasing.Title)
+                    }
+                },
+                new TextFormGroup
+                {
+                    new ButtonFormItem(new MvxCommand(AddAttachment))
+                    {
+                        Label = "Add attachment..."
                     }
                 },
                 new TextFormGroup
@@ -84,6 +115,10 @@ namespace Buform.Example.MvvmCross.Core
         }
 
         private void Create()
+        {
+        }
+
+        private void AddAttachment()
         {
         }
     }

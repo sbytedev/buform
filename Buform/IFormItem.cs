@@ -8,10 +8,12 @@ namespace Buform
         string? PropertyName { get; }
 
         bool IsReadOnly { get; set; }
+        bool IsVisible { get; set; }
 
         object? Value { get; set; }
 
         event EventHandler<FormValueChangedEventArgs>? ValueChanged;
+        event EventHandler? VisibilityChanged;
 
         void Initialize(Form form, object target);
     }

@@ -12,6 +12,7 @@ namespace Buform
         private Expression<Func<TValue>>? _property;
         private TValue? _value;
         private bool _isReadOnly;
+        private bool _isVisible;
         private bool _shouldSkipValueChangedCallback;
 
         protected Form? Form { get; private set; }
@@ -28,6 +29,23 @@ namespace Buform
                 _isReadOnly = value;
 
                 NotifyPropertyChanged();
+            }
+        }
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set
+            {
+                if (_isVisible == value)
+                {
+                    return;
+                }
+
+                _isVisible = value;
+
+                NotifyPropertyChanged();
+                OnIsVisibleChanged();
             }
         }
 
@@ -48,6 +66,7 @@ namespace Buform
         public virtual Action<Form, TValue?>? ValueChangedCallback { get; set; }
 
         public event EventHandler<FormValueChangedEventArgs>? ValueChanged;
+        public event EventHandler? VisibilityChanged;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -56,11 +75,15 @@ namespace Buform
             _property = property ?? throw new ArgumentNullException(nameof(property));
 
             PropertyName = _property.GetMemberName();
+
+            _isVisible = true;
         }
 
         protected FormItem(TValue value)
         {
             _value = value ?? throw new ArgumentNullException(nameof(value));
+
+            _isVisible = true;
         }
 
         private TValue? GetValue()
@@ -126,6 +149,11 @@ namespace Buform
             ValueChanged?.Invoke(this, new FormValueChangedEventArgs(PropertyName ?? string.Empty));
 
             ValueChangedCallback?.Invoke(Form, Value);
+        }
+
+        protected virtual void OnIsVisibleChanged()
+        {
+            VisibilityChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void Initialize(Form form, object target)
