@@ -113,6 +113,9 @@
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-81.png" />
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-87.png" />
         <ImageAsset Include="Assets.xcassets\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Logo.imageset\Contents.json" />
+        <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@2x.png" />
+        <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@3x.png" />
     </ItemGroup>
 
     <ItemGroup>
