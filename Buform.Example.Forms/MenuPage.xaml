@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<views:MvxContentPage x:TypeArguments="core:MenuViewModel"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:buform="clr-namespace:Buform;assembly=Buform.Forms"
+                      xmlns:bindings="clr-namespace:MvvmCross.Forms.Bindings;assembly=MvvmCross.Forms"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:core="clr-namespace:Buform.Example.Core;assembly=Buform.Example.Core"
+                      x:Class="Buform.Example.Forms.MenuPage"
+                      Title="{bindings:MvxBind Title}"
+                      bindings:Bi.nd="Title Title">
+    <views:MvxContentPage.Content>
+        <buform:FormView Form="{bindings:MvxBind Form}" />
+    </views:MvxContentPage.Content>
+</views:MvxContentPage>

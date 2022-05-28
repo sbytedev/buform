@@ -1,14 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.MvvmCross.iOS", "Buform.Example.MvvmCross.iOS\Buform.Example.MvvmCross.iOS.csproj", "{8432E788-117D-4E76-BCA8-9A4962CE7D97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform", "Buform\Buform.csproj", "{1682526B-53D6-4995-BE43-553A2848D5C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.MvvmCross.Core", "Buform.Example.MvvmCross.Core\Buform.Example.MvvmCross.Core.csproj", "{8738CA21-E070-4D53-9E19-84DFB385152C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.Core", "Buform.Example.Core\Buform.Example.Core.csproj", "{8738CA21-E070-4D53-9E19-84DFB385152C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.FluentValidation", "Buform.FluentValidation\Buform.FluentValidation.csproj", "{93B30462-F203-47A4-8C5C-7984C473D486}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.ColorPicker", "Buform.ColorPicker\Buform.ColorPicker.csproj", "{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Forms", "Buform.Forms\Buform.Forms.csproj", "{1036996E-FB80-4283-84AD-266DDCF32704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.Forms", "Buform.Example.Forms\Buform.Example.Forms.csproj", "{4B533C8D-26C3-4F9B-804A-6343F09BA213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buform.Example.Forms.iOS", "Buform.Example.Forms.iOS\Buform.Example.Forms.iOS.csproj", "{FC878423-9904-47AE-A118-15AB63E570DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,5 +69,29 @@ Global
 		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhone.Build.0 = Release|Any CPU
 		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{37F63AF3-AB7F-44D8-88F7-81D1C79DFF5C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Release|iPhone.Build.0 = Release|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{1036996E-FB80-4283-84AD-266DDCF32704}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Release|iPhone.Build.0 = Release|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{4B533C8D-26C3-4F9B-804A-6343F09BA213}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Debug|iPhone.Build.0 = Debug|iPhone
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Release|iPhone.ActiveCfg = Release|iPhone
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Release|iPhone.Build.0 = Release|iPhone
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{FC878423-9904-47AE-A118-15AB63E570DB}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 EndGlobal

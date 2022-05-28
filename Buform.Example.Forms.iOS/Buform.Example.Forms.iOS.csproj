@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-        <ProjectGuid>{8432E788-117D-4E76-BCA8-9A4962CE7D97}</ProjectGuid>
+        <ProjectGuid>{FC878423-9904-47AE-A118-15AB63E570DB}</ProjectGuid>
         <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <OutputType>Exe</OutputType>
-        <RootNamespace>Buform.Example.MvvmCross.iOS</RootNamespace>
-        <AssemblyName>Buform.Example.MvvmCross.iOS</AssemblyName>
+        <RootNamespace>Buform.Example.Forms.iOS</RootNamespace>
+        <AssemblyName>Buform.Example.Forms.iOS</AssemblyName>
         <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
         <LangVersion>default</LangVersion>
         <Nullable>enable</Nullable>
@@ -113,17 +113,10 @@
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-81.png" />
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-87.png" />
         <ImageAsset Include="Assets.xcassets\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\Logo.imageset\Contents.json" />
-        <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@2x.png" />
-        <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@3x.png" />
-        <ImageAsset Include="Assets.xcassets\Main.colorset\Contents.json" />
     </ItemGroup>
 
     <ItemGroup>
         <InterfaceDefinition Include="LaunchScreen.storyboard" />
-        <InterfaceDefinition Include="HeaderFormGroupHeader.xib">
-          <DependentUpon>HeaderFormGroupHeader.cs</DependentUpon>
-        </InterfaceDefinition>
     </ItemGroup>
 
     <ItemGroup>
@@ -133,18 +126,14 @@
 
     <ItemGroup>
         <Compile Include="AppDelegate.cs" />
-        <Compile Include="ComponentsViewController.cs" />
-        <Compile Include="CreateEventViewController.cs" />
-        <Compile Include="CreateConnectionViewController.cs" />
-        <Compile Include="MenuViewController.cs" />
         <Compile Include="Setup.cs" />
-        <Compile Include="HeaderFormGroupHeader.cs" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="MvvmCross.Forms" Version="8.0.2" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
         <PackageReference Include="FluentValidation" Version="11.0.1" />
         <PackageReference Include="Humanizer.Core" Version="2.14.1" />
-        <PackageReference Include="MvvmCross" Version="8.0.2" />
         <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="All" />
         <PackageReference Include="SByteDev.Common.Extensions" Version="1.0.6" />
         <PackageReference Include="SByteDev.Xamarin.iOS.Extensions" Version="1.0.6" />
@@ -157,7 +146,9 @@
     <ItemGroup>
         <ProjectReference Include="..\Buform.ColorPicker\Buform.ColorPicker.csproj" />
         <ProjectReference Include="..\Buform.Example.Core\Buform.Example.Core.csproj" />
+        <ProjectReference Include="..\Buform.Example.Forms\Buform.Example.Forms.csproj" />
         <ProjectReference Include="..\Buform.FluentValidation\Buform.FluentValidation.csproj" />
+        <ProjectReference Include="..\Buform.Forms\Buform.Forms.csproj" />
         <ProjectReference Include="..\Buform\Buform.csproj" />
     </ItemGroup>
 
