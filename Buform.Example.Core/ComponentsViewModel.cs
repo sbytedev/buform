@@ -32,6 +32,7 @@ namespace Buform.Example.Core
         public int Stepper { get; set; }
         public DateTime DateTime { get; set; }
         public bool Switch { get; set; }
+        public string? HiddenText { get; set; }
         public string? CallbackPicker { get; set; }
         public int? Picker { get; set; }
         public int? AsyncPicker { get; set; }
@@ -246,7 +247,15 @@ namespace Buform.Example.Core
                 {
                     new SwitchFormItem(() => Switch)
                     {
-                        Label = "Switch"
+                        Label = "Switch",
+                        ValueChangedCallback = (form, value) => form.GetItem(() => HiddenText)!.IsVisible = value
+                    },
+                    new TextFormItem(
+                        () => HiddenText
+                    )
+                    {
+                        Label = "Hidden text",
+                        IsVisible = false
                     }
                 },
                 new TextFormGroup("Steppers")

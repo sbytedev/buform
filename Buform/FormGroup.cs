@@ -6,7 +6,9 @@ namespace Buform
 {
     public abstract class FormGroup<TFormItem> : FormCollection<TFormItem>, IFormGroup where TFormItem : IFormItem
     {
-        private readonly IDictionary<TFormItem, int> _hiddenItems = new Dictionary<TFormItem, int>();
+        private readonly IDictionary<IFormItem, int> _hiddenItems = new Dictionary<IFormItem, int>();
+
+        public IEnumerable<IFormItem> HiddenItems => _hiddenItems.Keys;
 
         IEnumerator<IFormItem> IEnumerable<IFormItem>.GetEnumerator()
         {
@@ -34,9 +36,7 @@ namespace Buform
 
                 _hiddenItems.Remove(item);
 
-                item.VisibilityChanged -= OnItemVisibilityChanged;
-
-                InsertItem(index, item);
+                base.InsertItem(index, item);
             }
             else
             {
@@ -49,9 +49,7 @@ namespace Buform
 
                 _hiddenItems[item] = index;
 
-                RemoveItem(index);
-
-                item.VisibilityChanged += OnItemVisibilityChanged;
+                base.RemoveItem(index);
             }
         }
         
@@ -70,7 +68,14 @@ namespace Buform
         {
             ShiftHiddenItems(index, 1);
 
-            base.InsertItem(index, item);
+            if (item.IsVisible)
+            {
+                base.InsertItem(index, item);
+            }
+            else
+            {
+                _hiddenItems[item] = index;
+            }
 
             item.ValueChanged += OnItemValueChanged;
             item.VisibilityChanged += OnItemVisibilityChanged;
@@ -78,7 +83,10 @@ namespace Buform
 
         protected override void SetItem(int index, TFormItem item)
         {
-            ShiftHiddenItems(index, 1);
+            var existingItem = this[index];
+
+            existingItem.ValueChanged += OnItemValueChanged;
+            existingItem.VisibilityChanged += OnItemVisibilityChanged;
             
             base.SetItem(index, item);
 
@@ -95,7 +103,14 @@ namespace Buform
 
             ShiftHiddenItems(index, -1);
 
-            base.RemoveItem(index);
+            if (item.IsVisible)
+            {
+                base.RemoveItem(index);
+            }
+            else
+            {
+                _hiddenItems.Remove(item);
+            }
         }
 
         protected override void ClearItems()
@@ -107,7 +122,7 @@ namespace Buform
                 item.Dispose();
             }
 
-            foreach (var item in _hiddenItems.Keys)
+            foreach (var item in HiddenItems)
             {
                 item.ValueChanged -= OnItemValueChanged;
                 item.VisibilityChanged -= OnItemVisibilityChanged;
@@ -121,8 +136,8 @@ namespace Buform
 
         public virtual IFormItem? GetItem(string propertyName)
         {
-            return this.FirstOrDefault<IFormItem>(item => item.PropertyName == propertyName) ??
-                   _hiddenItems.Keys.FirstOrDefault(item => item.PropertyName == propertyName);
+            return this.FirstOrDefault<IFormItem>(item => item.PropertyName == propertyName) 
+                   ?? HiddenItems.FirstOrDefault(item => item.PropertyName == propertyName);
         }
 
         protected override void Dispose(bool isDisposing)
@@ -136,7 +151,7 @@ namespace Buform
                     item.Dispose();
                 }
 
-                foreach (var item in _hiddenItems.Keys)
+                foreach (var item in HiddenItems)
                 {
                     item.ValueChanged -= OnItemValueChanged;
                     item.VisibilityChanged -= OnItemVisibilityChanged;

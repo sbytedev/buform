@@ -29,7 +29,11 @@ namespace Buform
 
                 NotifyPropertyChanged();
 
-                UpdateItems(this.SelectMany(item => item));
+                var items = this
+                    .SelectMany(item => item)
+                    .Concat(this.SelectMany(item => item.HiddenItems));
+
+                UpdateItems(items);
             }
         }
 
@@ -51,14 +55,19 @@ namespace Buform
             }
         }
 
-        protected virtual void InitializeItems(IEnumerable<IFormItem> items)
+        protected virtual void InitializeItems(IFormGroup group)
         {
             if (Target == null)
             {
                 return;
             }
 
-            foreach (var item in items)
+            foreach (var item in group)
+            {
+                item.Initialize(this, Target);
+            }
+
+            foreach (var item in group.HiddenItems)
             {
                 item.Initialize(this, Target);
             }
