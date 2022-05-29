@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Foundation;
+using SByteDev.Common.Extensions;
 using UIKit;
 
 namespace Buform
@@ -147,6 +148,106 @@ namespace Buform
         protected override void RowSelected(NSIndexPath indexPath, object item)
         {
             FindCell(indexPath)?.OnSelected();
+        }
+
+        protected override bool CanEditRow(NSIndexPath indexPath, object item)
+        {
+            if (item is not IFormItem formItem)
+            {
+                return false;
+            }
+
+            var group = GetGroup(indexPath.Section);
+
+            if (group == null)
+            {
+                return false;
+            }
+
+            if (group.RemoveCommand.SafeCanExecute(formItem.Value))
+            {
+                return true;
+            }
+
+            if (group.InsertCommand.SafeCanExecute(formItem.Value))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        protected override UITableViewCellEditingStyle EditingStyleForRow(NSIndexPath indexPath, object item)
+        {
+            if (item is not IFormItem formItem)
+            {
+                return UITableViewCellEditingStyle.None;
+            }
+
+            var group = GetGroup(indexPath.Section);
+
+            if (group == null)
+            {
+                return UITableViewCellEditingStyle.None;
+            }
+
+            if (group.RemoveCommand.SafeCanExecute(formItem.Value))
+            {
+                return UITableViewCellEditingStyle.Delete;
+            }
+
+            if (group.InsertCommand.SafeCanExecute(formItem.Value))
+            {
+                return UITableViewCellEditingStyle.Insert;
+            }
+
+            return UITableViewCellEditingStyle.None;
+        }
+
+        protected override void CommitEditingStyle(UITableViewCellEditingStyle editingStyle, NSIndexPath indexPath, object item)
+        {
+            if (item is not IFormItem formItem)
+            {
+                return;
+            }
+
+            var group = GetGroup(indexPath.Section);
+
+            if (group == null)
+            {
+                return;
+            }
+
+            switch (editingStyle)
+            {
+                case UITableViewCellEditingStyle.None:
+                    return;
+                case UITableViewCellEditingStyle.Delete:
+                    group.RemoveCommand.SafeExecute(formItem.Value);
+                    break;
+                case UITableViewCellEditingStyle.Insert:
+                    group.InsertCommand.SafeExecute(formItem.Value);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(editingStyle), editingStyle, null);
+            }
+        }
+
+        protected override bool CanMoveRow(NSIndexPath indexPath, object item)
+        {
+            if (item is not IFormItem formItem)
+            {
+                return false;
+            }
+
+            var group = GetGroup(indexPath.Section);
+
+            return group != null && group.MoveCommand.SafeCanExecute(formItem.Value);
+        }
+
+        protected override void MoveRow(NSIndexPath sourceIndexPath, NSIndexPath destinationIndexPath, object item)
+        {
+            GetGroup(sourceIndexPath.Section)?.MoveCommand.SafeExecute((sourceIndexPath.Row, destinationIndexPath.Row));
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Buform
 {
@@ -8,7 +9,44 @@ namespace Buform
     {
         private readonly IDictionary<IFormItem, int> _hiddenItems = new Dictionary<IFormItem, int>();
 
+        private ICommand? _removeCommand;
+        private ICommand? _moveCommand;
+        private ICommand? _insertCommand;
+
         public IEnumerable<IFormItem> HiddenItems => _hiddenItems.Keys;
+
+        public virtual ICommand? RemoveCommand
+        {
+            get => _removeCommand;
+            set
+            {
+                _removeCommand = value;
+
+                NotifyPropertyChanged();
+            }
+        }
+
+        public virtual ICommand? MoveCommand
+        {
+            get => _moveCommand;
+            set
+            {
+                _moveCommand = value;
+
+                NotifyPropertyChanged();
+            }
+        }
+
+        public virtual ICommand? InsertCommand
+        {
+            get => _insertCommand;
+            set
+            {
+                _insertCommand = value;
+
+                NotifyPropertyChanged();
+            }
+        }
 
         IEnumerator<IFormItem> IEnumerable<IFormItem>.GetEnumerator()
         {

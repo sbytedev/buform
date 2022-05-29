@@ -609,6 +609,40 @@ namespace Buform
             /* Nothing to do */
         }
 
+        public sealed override bool CanMoveRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            var item = GetItem(indexPath);
+
+            if (item == null)
+            {
+                throw new InvalidOperationException($"Can not get item for index path {indexPath}.");
+            }
+
+            return CanMoveRow(indexPath, item);
+        }
+
+        protected virtual bool CanMoveRow(NSIndexPath indexPath, object item)
+        {
+            return false;
+        }
+
+        public sealed override void MoveRow(UITableView tableView, NSIndexPath sourceIndexPath, NSIndexPath destinationIndexPath)
+        {
+            var item = GetItem(sourceIndexPath);
+
+            if (item == null)
+            {
+                throw new InvalidOperationException($"Can not get item for index path {sourceIndexPath}.");
+            }
+
+            MoveRow(sourceIndexPath, destinationIndexPath, item);
+        }
+
+        protected virtual void MoveRow(NSIndexPath sourceIndexPath, NSIndexPath destinationIndexPath, object item)
+        {
+            /* Nothing to do */
+        }
+
         public sealed override NSIndexPath WillSelectRow(UITableView tableView, NSIndexPath indexPath)
         {
             var item = GetItem(indexPath);

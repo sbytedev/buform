@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -25,6 +26,7 @@ namespace Buform.Example.Core
         public ICommand CloseCommand { get; }
         public ICommand ToggleReadOnlyModeCommand { get; }
         public Color Color { get; set; }
+        public ObservableCollection<int> List { get; }
         public Enum Segments { get; set; }
         public string? Text { get; set; }
         public string? MultilineText { get; set; }
@@ -47,6 +49,7 @@ namespace Buform.Example.Core
         public ComponentsViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
+            List = new ObservableCollection<int>(Enumerable.Range(1, 10));
             Color = Color.Gold;
             MultilineText = new LipsumGenerator().GenerateLipsum(1);
             DateTime = DateTime.UtcNow;
@@ -70,7 +73,9 @@ namespace Buform.Example.Core
                 new ListFormGroup<int>("List")
                 {
                     Formatter = item => item.ToWords(),
-                    Source = Enumerable.Range(1, 10).ToArray()
+                    Source = List,
+                    RemoveCommand = new MvxCommand<int>(item => List.Remove(item)),
+                    MoveCommand = new MvxCommand<(int, int)>(item => List.Move(item.Item1, item.Item2))
                 },
                 new TextFormGroup("Pickers")
                 {

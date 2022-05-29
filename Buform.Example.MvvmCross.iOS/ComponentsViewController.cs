@@ -22,7 +22,8 @@ namespace Buform.Example.MvvmCross.iOS
             base.ViewDidLoad();
 
             NavigationItem.LeftBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Cancel);
-            NavigationItem.RightBarButtonItem = new UIBarButtonItem("Read-only", UIBarButtonItemStyle.Plain, null);
+            var readOnlyButtonItem = new UIBarButtonItem("Read-only", UIBarButtonItemStyle.Plain, null);
+            NavigationItem.RightBarButtonItems = new[] { EditButtonItem, readOnlyButtonItem };
 
             TableView.KeyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive;
 
@@ -31,7 +32,7 @@ namespace Buform.Example.MvvmCross.iOS
             var set = CreateBindingSet();
             set.Bind(this).For(v => v.Title).To(vm => vm.Title);
             set.Bind(NavigationItem.LeftBarButtonItem).To(vm => vm.CloseCommand);
-            set.Bind(NavigationItem.RightBarButtonItem).To(vm => vm.ToggleReadOnlyModeCommand);
+            set.Bind(readOnlyButtonItem).To(vm => vm.ToggleReadOnlyModeCommand);
             set.Bind(_source).For(v => v.Form).To(vm => vm.Form);
             set.Apply();
         }
