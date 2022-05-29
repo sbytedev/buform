@@ -8,9 +8,9 @@ namespace Buform
 {
     public interface IFormGroup : IEnumerable<IFormItem>, INotifyCollectionChanged, INotifyPropertyChanged, IDisposable
     {
-        ICommand? RemoveCommand { get; set; }
-        ICommand? MoveCommand { get; set; }
-        ICommand? InsertCommand { get; set; }
+        ICommand? RemoveCommand { get; }
+        ICommand? MoveCommand { get; }
+        ICommand? InsertCommand { get; }
 
         IEnumerable<IFormItem> HiddenItems { get; }
         
