@@ -124,11 +124,6 @@ namespace Buform
                 return;
             }
 
-            if (_shouldSkipValueChangedCallback)
-            {
-                return;
-            }
-
             OnValueChanged();
         }
 
@@ -147,6 +142,11 @@ namespace Buform
             NotifyPropertyChanged(nameof(Value));
 
             ValueChanged?.Invoke(this, new FormValueChangedEventArgs(PropertyName ?? string.Empty));
+
+            if (_shouldSkipValueChangedCallback)
+            {
+                return;
+            }
 
             ValueChangedCallback?.Invoke(Form, Value);
         }
@@ -179,7 +179,11 @@ namespace Buform
 
             _propertyInfo = Target?.GetType().GetProperty(PropertyName ?? string.Empty);
 
+            _shouldSkipValueChangedCallback = true;
+
             OnValueChanged();
+
+            _shouldSkipValueChangedCallback = false;
         }
 
         public void Dispose()
