@@ -9,14 +9,33 @@ namespace Buform
 {
     public class FormViewRenderer : ListViewRenderer
     {
+        private void UpdateSourceForm()
+        {
+            if (Control.Source is not FormTableViewSource source)
+            {
+                return;
+            }
+
+            if (Element is not FormView formView)
+            {
+                return;
+            }
+
+            source.Form = formView.Form;
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
             base.OnElementChanged(e);
 
-            if (e.NewElement != null)
+            if (e.NewElement == null)
             {
-                Control.Source = new FormTableViewSource(Control);
+                return;
             }
+
+            Control.Source = new FormTableViewSource(Control);
+
+            UpdateSourceForm();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -28,15 +47,7 @@ namespace Buform
                 return;
             }
 
-            if (Control.Source is not FormTableViewSource source)
-            {
-                return;
-            }
-
-            if (Element is FormView formView)
-            {
-                source.Form = formView.Form;
-            }
+            UpdateSourceForm();
         }
     }
 }
