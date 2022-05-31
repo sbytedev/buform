@@ -12,5 +12,19 @@ namespace Buform.Example.Forms.iOS
         {
             UIApplication.Main(args, null, typeof(AppDelegate));
         }
+
+        public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
+        {
+            var color = UIColor.FromName("Main");
+
+            UIBarButtonItem.Appearance.TintColor = color;
+            UIButton.Appearance.TintColor = color;
+            UIDatePicker.Appearance.TintColor = color;
+            UISlider.Appearance.TintColor = color;
+            UITextField.Appearance.TintColor = color;
+            UITextView.Appearance.TintColor = color;
+
+            return base.FinishedLaunching(application, launchOptions);
+        }
     }
 }
