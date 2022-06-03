@@ -41,8 +41,9 @@
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
         <Compile Include="BuformFormsIos.cs" />
-        <Compile Include="FormViewRendererIos.cs" />
+        <Compile Include="FormsTableViewSource.cs"/>
         <Compile Include="TableViewHeaderFooterView.cs" />
+        <Compile Include="FormViewRendererIos.cs"/>
     </ItemGroup>
 
 </Project>

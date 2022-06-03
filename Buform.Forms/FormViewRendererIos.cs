@@ -13,7 +13,7 @@ namespace Buform
     {
         private void UpdateSourceForm()
         {
-            if (Control.Source is not FormTableViewSource source)
+            if (Control.Source is not FormsFormTableViewSource source)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace Buform
         {
             var tableView = new UITableView(CGRect.Empty, UITableViewStyle.InsetGrouped);
 
-            var source = new FormTableViewSource(tableView);
+            var source = new FormsFormTableViewSource(tableView);
 
             tableView.Source = source;
             tableView.KeyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive;
