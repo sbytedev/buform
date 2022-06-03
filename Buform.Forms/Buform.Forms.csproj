@@ -26,15 +26,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Buform\Buform.csproj" />
+        <ProjectReference Include="..\Buform\Buform.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401"/>
     </ItemGroup>
 
     <ItemGroup>
       <Compile Include="FormView.cs" />
+        <Compile Include="FormGroupView.cs"/>
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
