@@ -1,3 +1,4 @@
+using Buform.Example.Core;
 using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
@@ -39,6 +40,13 @@ namespace Buform.Example.Forms.iOS
             base.InitializeFirstChance(iocProvider);
 
             iocProvider.LazyConstructAndRegisterSingleton<IMvxCommandHelper, MvxStrongCommandHelper>();
+        }
+
+        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
+        {
+            base.InitializeLastChance(iocProvider);
+
+            BuformForms.RegisterGroupHeaderClass<HeaderFormGroup, HeaderFormGroupView>();
         }
     }
 }
