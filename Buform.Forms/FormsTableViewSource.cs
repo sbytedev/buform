@@ -28,9 +28,7 @@ namespace Buform
                 return base.GetViewForHeader(section, sectionItem);
             }
 
-            var headerView = new TableViewHeaderFooterView(viewType);
-
-            TableView.TableHeaderView = headerView;
+            var headerView = new TableViewHeaderFooterView(viewType, sectionItem);
 
             return headerView;
         }

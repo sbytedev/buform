@@ -1,4 +1,5 @@
 using System;
+using CoreGraphics;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
@@ -8,75 +9,64 @@ namespace Buform
 {
     public sealed class TableViewHeaderFooterView : UITableViewHeaderFooterView
     {
-        private readonly Type _viewType;
+        private readonly HeaderFooterView _headerFooterView;
 
-            public TableViewHeaderFooterView(Type viewType)
-                : base((NSString) viewType.Name)
-            {
-                _viewType = viewType;
-            }
+        private CGSize _estimatedSize;
 
-            private UITableView? GetTableView()
-            {
-                var view = this as UIView;
+        public TableViewHeaderFooterView(
+            Type viewType,
+            object bindingContext
+        )
+            : base((NSString) viewType.Name)
+        {
+            _headerFooterView = (Activator.CreateInstance(viewType) as HeaderFooterView)!;
 
-                while (true)
-                {
-                    switch (view.Superview)
-                    {
-                        case null:
-                            return null;
-                        case UITableView tableView:
-                            return tableView;
-                        default:
-                            view = view.Superview;
-                            break;
-                    }
-                }
-            }
+            _headerFooterView.BindingContext = bindingContext;
 
-            public override void LayoutSubviews()
-            {
-                base.LayoutSubviews();
+            var contentRenderer = Platform.CreateRenderer(_headerFooterView);
 
-                var tableView = GetTableView();
+            AddSubview(contentRenderer.NativeView);
 
-                if (tableView == null)
-                {
-                    return;
-                }
+            MeasureView();
+        }
 
-                if (Activator.CreateInstance(_viewType) is not FormGroupView formGroupView)
-                {
-                    return;
-                }
+        private void MeasureView()
+        {
+            var width = Bounds.Width;
 
-                var contentRenderer = Platform.CreateRenderer(formGroupView);
+            var request = _headerFooterView.Measure(
+                width,
+                double.PositiveInfinity,
+                MeasureFlags.IncludeMargins
+            );
 
-                Platform.SetRenderer(formGroupView, contentRenderer);
+            var verticalMargins = LayoutMargins.Top + LayoutMargins.Bottom;
 
-                var width = Bounds.Width;
+            _estimatedSize = new CGSize(
+                width,
+                Math.Ceiling(request.Request.Height - verticalMargins)
+            );
 
-                var request = formGroupView.Measure(
-                    width,
-                    double.PositiveInfinity,
-                    MeasureFlags.IncludeMargins
-                );
+            var bounds = new Rectangle(
+                0,
+                0,
+                _estimatedSize.Width,
+                _estimatedSize.Height
+            );
 
-                var verticalMargins = LayoutMargins.Top + LayoutMargins.Bottom;
+            Layout.LayoutChildIntoBoundingRegion(_headerFooterView, bounds);
+        }
 
-                var bounds = new Rectangle(
-                    0,
-                    0,
-                    width,
-                    Math.Ceiling(request.Request.Height) - verticalMargins
-                );
+        public override CGSize SizeThatFits(CGSize size)
+        {
+            return _estimatedSize;
+        }
 
-                Layout.LayoutChildIntoBoundingRegion(formGroupView, bounds);
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
 
-                Device.BeginInvokeOnMainThread(() => { tableView.TableHeaderView = contentRenderer.NativeView; });
-
-                contentRenderer.NativeView.Frame = Bounds;
-            }
+            MeasureView();
+        }
     }
 }
