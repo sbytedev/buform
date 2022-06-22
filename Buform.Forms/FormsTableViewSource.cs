@@ -14,6 +14,20 @@ namespace Buform
             /* Required constructor */
         }
 
+        protected override UITableViewHeaderFooterView? GetViewForFooter(nint section, object sectionItem)
+        {
+            var sectionType = sectionItem.GetType();
+
+            if (!BuformForms.TryGetFooterViewType(sectionType, out var viewType))
+            {
+                return base.GetViewForFooter(section, sectionItem);
+            }
+
+            return viewType == null
+                ? base.GetViewForFooter(section, sectionItem)
+                : new TableViewHeaderFooterView(viewType, sectionItem);
+        }
+
         protected override UITableViewHeaderFooterView? GetViewForHeader(nint section, object sectionItem)
         {
             var sectionType = sectionItem.GetType();
@@ -23,14 +37,9 @@ namespace Buform
                 return base.GetViewForHeader(section, sectionItem);
             }
 
-            if (viewType == null)
-            {
-                return base.GetViewForHeader(section, sectionItem);
-            }
-
-            var headerView = new TableViewHeaderFooterView(viewType, sectionItem);
-
-            return headerView;
+            return viewType == null
+                ? base.GetViewForHeader(section, sectionItem)
+                : new TableViewHeaderFooterView(viewType, sectionItem);
         }
     }
 }
