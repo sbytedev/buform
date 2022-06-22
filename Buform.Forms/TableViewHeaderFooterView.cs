@@ -9,7 +9,7 @@ namespace Buform
 {
     public sealed class TableViewHeaderFooterView : UITableViewHeaderFooterView
     {
-        private readonly HeaderFooterView _headerFooterView;
+        private readonly FormsHeaderFooterView _formsHeaderFooterView;
 
         private CGSize _estimatedSize;
 
@@ -19,11 +19,11 @@ namespace Buform
         )
             : base((NSString) viewType.Name)
         {
-            _headerFooterView = (Activator.CreateInstance(viewType) as HeaderFooterView)!;
+            _formsHeaderFooterView = (Activator.CreateInstance(viewType) as FormsHeaderFooterView)!;
 
-            _headerFooterView.BindingContext = bindingContext;
+            _formsHeaderFooterView.BindingContext = bindingContext;
 
-            var contentRenderer = Platform.CreateRenderer(_headerFooterView);
+            var contentRenderer = Platform.CreateRenderer(_formsHeaderFooterView);
 
             AddSubview(contentRenderer.NativeView);
 
@@ -34,7 +34,7 @@ namespace Buform
         {
             var width = Bounds.Width;
 
-            var request = _headerFooterView.Measure(
+            var request = _formsHeaderFooterView.Measure(
                 width,
                 double.PositiveInfinity,
                 MeasureFlags.IncludeMargins
@@ -54,7 +54,7 @@ namespace Buform
                 _estimatedSize.Height
             );
 
-            Layout.LayoutChildIntoBoundingRegion(_headerFooterView, bounds);
+            Layout.LayoutChildIntoBoundingRegion(_formsHeaderFooterView, bounds);
         }
 
         public override CGSize SizeThatFits(CGSize size)

@@ -2,11 +2,11 @@ using Xamarin.Forms;
 
 namespace Buform
 {
-    public class HeaderFooterView : ContentView
+    public class FormsHeaderFooterView : ContentView
     {
     }
 
-    public class HeaderFooterView<TGroup> : HeaderFooterView
+    public class FormsHeaderFooterView<TGroup> : FormsHeaderFooterView
         where TGroup : class, IFormGroup
     {
         protected TGroup? Group => BindingContext as TGroup;
