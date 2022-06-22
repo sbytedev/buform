@@ -15,14 +15,14 @@ namespace Buform
 
         public static void RegisterGroupHeaderClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupView : FormGroupView<TGroup>
+            where TGroupView : HeaderFooterView<TGroup>
         {
             GroupRegistry.RegisterGroupHeaderClass<TGroup, TGroupView>();
         }
 
         public static void RegisterGroupFooterClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupView : FormGroupView<TGroup>
+            where TGroupView : HeaderFooterView<TGroup>
         {
             GroupRegistry.RegisterGroupFooterClass<TGroup, TGroupView>();
         }

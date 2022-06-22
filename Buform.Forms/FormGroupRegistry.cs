@@ -43,14 +43,14 @@ namespace Buform
 
         public void RegisterGroupHeaderClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupView : FormGroupView<TGroup>
+            where TGroupView : HeaderFooterView<TGroup>
         {
             _groups[(typeof(TGroup), HolderType.Header)] = typeof(TGroupView);
         }
 
         public void RegisterGroupFooterClass<TGroup, TGroupView>()
             where TGroup : class, IFormGroup
-            where TGroupView : FormGroupView<TGroup>
+            where TGroupView : HeaderFooterView<TGroup>
         {
             _groups[(typeof(TGroup), HolderType.Footer)] = typeof(TGroupView);
         }
