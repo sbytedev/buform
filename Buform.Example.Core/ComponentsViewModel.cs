@@ -302,7 +302,7 @@ namespace Buform.Example.Core
                 },
                 new TextFormGroup("Digit generation")
                 {
-                    new DigitGenerationItem(() => GeneratedDigit)
+                    new RandomNumberGeneratorItem(() => GeneratedDigit)
                     {
                         Label = "Generated digit:"
                     }

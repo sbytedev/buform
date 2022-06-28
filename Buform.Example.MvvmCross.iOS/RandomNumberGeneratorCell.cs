@@ -9,7 +9,7 @@ namespace Buform.Example.MvvmCross.iOS
 {
     [Preserve(AllMembers = true)]
     [Register(nameof(DigitGenerationCell))]
-    public sealed class DigitGenerationCell : FormCell<DigitGenerationItem>
+    public sealed class DigitGenerationCell : FormCell<RandomNumberGeneratorItem>
     {
         private const string GoForwardIconName = "goforward";
 

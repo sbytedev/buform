@@ -5,7 +5,7 @@ using MvvmCross.Commands;
 
 namespace Buform.Example.Core
 {
-    public sealed class DigitGenerationItem : FormItem<int>
+    public sealed class RandomNumberGeneratorItem : FormItem<int>
     {
         private const int MinValue = 0;
         private const int MaxValue = 1000;
@@ -15,7 +15,7 @@ namespace Buform.Example.Core
         public string? Label { get; set; }
         public ICommand RegenerateCommand { get; }
 
-        public DigitGenerationItem(Expression<Func<int>> property) : base(property)
+        public RandomNumberGeneratorItem(Expression<Func<int>> property) : base(property)
         {
             _random = new Random();
 

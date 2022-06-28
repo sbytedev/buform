@@ -136,7 +136,7 @@
         <Compile Include="ComponentsViewController.cs" />
         <Compile Include="CreateEventViewController.cs" />
         <Compile Include="CreateConnectionViewController.cs" />
-        <Compile Include="DigitGenerationCell.cs" />
+        <Compile Include="RandomNumberGeneratorCell.cs" />
         <Compile Include="MenuViewController.cs" />
         <Compile Include="Setup.cs" />
         <Compile Include="HeaderFormGroupHeader.cs" />
