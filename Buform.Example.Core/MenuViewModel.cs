@@ -9,6 +9,7 @@ namespace Buform.Example.Core
 {
     public sealed class MenuViewModel : MvxNavigationViewModel
     {
+        public int GeneratedDigit { get; set; }
         public string Title { get; }
 
         public Form Form { get; }
@@ -27,6 +28,13 @@ namespace Buform.Example.Core
                     {
                         Label = "Show All Components",
                         InputType = ButtonInputType.Done
+                    }
+                },
+                new TextFormGroup("Digit generation")
+                {
+                    new RandomNumberGeneratorItem(() => GeneratedDigit)
+                    {
+                        Label = "Number"
                     }
                 },
                 new TextFormGroup("Examples", "Contains some real-life examples.")
