@@ -42,14 +42,14 @@ namespace Buform.Example.MvvmCross.iOS
             _button.Enabled = !Item.IsReadOnly;
         }
 
-        private void UpdateTitle()
+        private void UpdateLabel()
         {
             if (_titleLabel == null)
             {
                 return;
             }
 
-            _titleLabel.Text = Item?.Title;
+            _titleLabel.Text = Item?.Label;
         }
 
         private void UpdateValue()
@@ -112,7 +112,7 @@ namespace Buform.Example.MvvmCross.iOS
         protected override void OnItemSet()
         {
             UpdateReadOnlyState();
-            UpdateTitle();
+            UpdateLabel();
             UpdateValue();
         }
 
@@ -123,8 +123,8 @@ namespace Buform.Example.MvvmCross.iOS
                 case nameof(Item.IsReadOnly):
                     UpdateReadOnlyState();
                     break;
-                case nameof(Item.Title):
-                    UpdateTitle();
+                case nameof(Item.Label):
+                    UpdateLabel();
                     break;
                 case nameof(Item.Value):
                     UpdateValue();

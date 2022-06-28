@@ -304,7 +304,7 @@ namespace Buform.Example.Core
                 {
                     new DigitGenerationItem(() => GeneratedDigit)
                     {
-                        Title = "Generated digit:"
+                        Label = "Generated digit:"
                     }
                 }
             };
