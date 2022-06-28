@@ -13,13 +13,13 @@ namespace Buform.Example.Core
         private readonly Random _random;
 
         public string? Label { get; set; }
-        public ICommand RegenerateCommand { get; }
+        public ICommand GenerateCommand { get; }
 
         public RandomNumberGeneratorItem(Expression<Func<int>> property) : base(property)
         {
             _random = new Random();
 
-            RegenerateCommand = new MvxCommand(Regenerate);
+            GenerateCommand = new MvxCommand(Regenerate);
         }
 
         private void Regenerate()

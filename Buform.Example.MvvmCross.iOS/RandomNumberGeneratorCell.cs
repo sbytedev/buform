@@ -64,7 +64,7 @@ namespace Buform.Example.MvvmCross.iOS
 
         private void ExecuteCommand(object _, EventArgs __)
         {
-            Item?.RegenerateCommand.SafeExecute();
+            Item?.GenerateCommand.SafeExecute();
         }
 
         protected override void Initialize()
