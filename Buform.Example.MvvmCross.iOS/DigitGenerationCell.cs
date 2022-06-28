@@ -1,5 +1,6 @@
 using System;
 using Buform.Example.Core;
+using CoreGraphics;
 using SByteDev.Common.Extensions;
 using UIKit;
 
@@ -86,10 +87,12 @@ namespace Buform.Example.MvvmCross.iOS
             };
 
             _button = UIButton.FromType(UIButtonType.Custom);
-            _button.TranslatesAutoresizingMaskIntoConstraints = false;
+            _button.Frame = new CGRect(0, 0, 70, 40);
             _button.TouchUpInside += ExecuteCommand;
 
-            ContentView.AddSubviews(_titleLabel, _valueLabel, _button);
+            AccessoryView = _button;
+
+            ContentView.AddSubviews(_titleLabel, _valueLabel);
 
             ContentView.AddConstraints(new[]
             {
@@ -99,9 +102,6 @@ namespace Buform.Example.MvvmCross.iOS
                 _valueLabel.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
                 _valueLabel.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
                 _valueLabel.LeadingAnchor.ConstraintEqualTo(_titleLabel.LayoutMarginsGuide.TrailingAnchor, 16),
-                _button.TopAnchor.ConstraintEqualTo(ContentView.TopAnchor),
-                _button.BottomAnchor.ConstraintEqualTo(ContentView.BottomAnchor),
-                _button.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor)
             });
         }
 
