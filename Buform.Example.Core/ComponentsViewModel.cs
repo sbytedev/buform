@@ -39,6 +39,7 @@ namespace Buform.Example.Core
         public int? Picker { get; set; }
         public int? AsyncPicker { get; set; }
         public int[]? MultiValuePicker { get; set; }
+        public int GeneratedDigit { get; set; }
 
         public ICommand Command { get; }
 
@@ -297,6 +298,14 @@ namespace Buform.Example.Core
                     {
                         Label = "Time",
                         InputType = DateTimeInputType.Time
+                    }
+                },
+                new TextFormGroup("Digit generation")
+                {
+                    new DigitGenerationItem(() => GeneratedDigit)
+                    {
+                        Title = "Generated digit:",
+                        RegenerateButtonText = "Refresh"
                     }
                 }
             };
