@@ -47,6 +47,8 @@ namespace Buform.Example.MvvmCross.iOS
             base.InitializeLastChance(iocProvider);
 
             Buform.RegisterGroupHeaderNib<HeaderFormGroup, HeaderFormGroupHeader>();
+
+            Buform.RegisterItemClass<DigitGenerationItem, DigitGenerationCell>();
         }
     }
 }
