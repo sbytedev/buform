@@ -39,7 +39,7 @@ namespace Buform.Example.MvvmCross.iOS
                 return;
             }
 
-            _button.Enabled = Item.IsReadOnly;
+            _button.Enabled = !Item.IsReadOnly;
         }
 
         private void UpdateTitle()
