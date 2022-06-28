@@ -13,7 +13,6 @@ namespace Buform.Example.Core
         private readonly Random _random;
 
         public string? Title { get; set; }
-        public string? RegenerateButtonText { get; set; }
         public ICommand RegenerateCommand { get; }
 
         public DigitGenerationItem(Expression<Func<int>> property) : base(property)

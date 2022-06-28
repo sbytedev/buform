@@ -304,8 +304,7 @@ namespace Buform.Example.Core
                 {
                     new DigitGenerationItem(() => GeneratedDigit)
                     {
-                        Title = "Generated digit:",
-                        RegenerateButtonText = "Refresh"
+                        Title = "Generated digit:"
                     }
                 }
             };

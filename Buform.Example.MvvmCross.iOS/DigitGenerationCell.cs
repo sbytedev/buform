@@ -1,13 +1,18 @@
 using System;
 using Buform.Example.Core;
 using CoreGraphics;
+using Foundation;
 using SByteDev.Common.Extensions;
 using UIKit;
 
 namespace Buform.Example.MvvmCross.iOS
 {
+    [Preserve(AllMembers = true)]
+    [Register(nameof(DigitGenerationCell))]
     public sealed class DigitGenerationCell : FormCell<DigitGenerationItem>
     {
+        private const string GoForwardIconName = "goforward";
+
         private UILabel? _titleLabel;
         private UILabel? _valueLabel;
         private UIButton? _button;
@@ -57,11 +62,6 @@ namespace Buform.Example.MvvmCross.iOS
             _valueLabel.Text = Item?.Value.ToString();
         }
 
-        private void UpdateButtonText()
-        {
-            _button?.SetTitle(Item?.RegenerateButtonText, UIControlState.Normal);
-        }
-
         private void ExecuteCommand(object _, EventArgs __)
         {
             Item?.RegenerateCommand.SafeExecute();
@@ -86,9 +86,13 @@ namespace Buform.Example.MvvmCross.iOS
                 TextColor = UIColor.SecondaryLabel
             };
 
-            _button = UIButton.FromType(UIButtonType.Custom);
+            _button = UIButton.FromType(UIButtonType.System);
             _button.Frame = new CGRect(0, 0, 70, 40);
             _button.TouchUpInside += ExecuteCommand;
+            _button.SetImage(
+                UIImage.GetSystemImage(GoForwardIconName)!,
+                UIControlState.Normal
+            );
 
             AccessoryView = _button;
 
@@ -110,7 +114,6 @@ namespace Buform.Example.MvvmCross.iOS
             UpdateReadOnlyState();
             UpdateTitle();
             UpdateValue();
-            UpdateButtonText();
         }
 
         protected override void OnItemPropertyChanged(string propertyName)
@@ -125,9 +128,6 @@ namespace Buform.Example.MvvmCross.iOS
                     break;
                 case nameof(Item.Value):
                     UpdateValue();
-                    break;
-                case nameof(Item.RegenerateButtonText):
-                    UpdateButtonText();
                     break;
             }
         }
