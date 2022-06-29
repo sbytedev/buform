@@ -1,9 +1,5 @@
 using System;
-using CoreGraphics;
-using Foundation;
 using UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
 
 namespace Buform
 {
