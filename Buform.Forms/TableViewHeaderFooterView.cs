@@ -26,7 +26,7 @@ namespace Buform
 
             _renderer = Platform.CreateRenderer(_formsHeaderFooterView);
 
-            AddSubview(_renderer.NativeView);
+            ContentView.AddSubview(_renderer.NativeView);
 
             EstimateViewSize();
         }
