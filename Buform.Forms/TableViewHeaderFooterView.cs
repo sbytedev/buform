@@ -28,10 +28,10 @@ namespace Buform
 
             AddSubview(_renderer.NativeView);
 
-            MeasureView();
+            EstimateViewSize();
         }
 
-        private void MeasureView()
+        private void EstimateViewSize()
         {
             var width = Bounds.Width;
 
@@ -47,17 +47,6 @@ namespace Buform
                 width,
                 Math.Ceiling(request.Request.Height - verticalMargins)
             );
-
-            var bounds = new Rectangle(
-                0,
-                0,
-                _estimatedSize.Width,
-                _estimatedSize.Height
-            );
-
-            Layout.LayoutChildIntoBoundingRegion(_formsHeaderFooterView, bounds);
-
-            _renderer.NativeView.Frame = bounds.ToRectangleF();
         }
 
         public override CGSize SizeThatFits(CGSize size)
@@ -69,7 +58,18 @@ namespace Buform
         {
             base.LayoutSubviews();
 
-            MeasureView();
+            EstimateViewSize();
+
+            var bounds = new Rectangle(
+                0,
+                0,
+                _estimatedSize.Width,
+                _estimatedSize.Height
+            );
+
+            Layout.LayoutChildIntoBoundingRegion(_formsHeaderFooterView, bounds);
+
+            _renderer.NativeView.Frame = bounds.ToRectangleF();
         }
     }
 }
