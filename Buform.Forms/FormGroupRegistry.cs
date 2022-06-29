@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Buform
 {
-    public sealed class FormGroupRegistry
+    internal sealed class FormGroupRegistry
     {
         private enum HolderType
         {

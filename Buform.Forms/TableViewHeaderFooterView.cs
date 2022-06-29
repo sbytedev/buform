@@ -7,7 +7,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace Buform
 {
-    public sealed class TableViewHeaderFooterView : UITableViewHeaderFooterView
+    internal sealed class TableViewHeaderFooterView : UITableViewHeaderFooterView
     {
         private readonly FormsHeaderFooterView _formsHeaderFooterView;
         private readonly IVisualElementRenderer _renderer;
