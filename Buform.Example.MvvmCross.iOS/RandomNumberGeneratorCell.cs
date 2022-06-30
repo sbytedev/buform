@@ -8,8 +8,8 @@ using UIKit;
 namespace Buform.Example.MvvmCross.iOS
 {
     [Preserve(AllMembers = true)]
-    [Register(nameof(DigitGenerationCell))]
-    public sealed class DigitGenerationCell : FormCell<RandomNumberGeneratorItem>
+    [Register(nameof(RandomNumberGeneratorCell))]
+    public sealed class RandomNumberGeneratorCell : FormCell<RandomNumberGeneratorItem>
     {
         private const string GoForwardIconName = "goforward";
 
@@ -17,12 +17,12 @@ namespace Buform.Example.MvvmCross.iOS
         private UILabel? _valueLabel;
         private UIButton? _button;
 
-        public DigitGenerationCell()
+        public RandomNumberGeneratorCell()
         {
             /* Required constructor */
         }
 
-        public DigitGenerationCell(IntPtr handle) : base(handle)
+        public RandomNumberGeneratorCell(IntPtr handle) : base(handle)
         {
             /* Required constructor */
         }
@@ -62,7 +62,7 @@ namespace Buform.Example.MvvmCross.iOS
             _valueLabel.Text = Item?.Value.ToString();
         }
 
-        private void OnButtonTouched(object _, EventArgs __)
+        private void OnTouchUpInside(object _, EventArgs __)
         {
             Item?.GenerateCommand.SafeExecute();
         }
@@ -87,7 +87,7 @@ namespace Buform.Example.MvvmCross.iOS
 
             _button = UIButton.FromType(UIButtonType.System);
             _button.Frame = new CGRect(0, 0, 70, 40);
-            _button.TouchUpInside += OnButtonTouched;
+            _button.TouchUpInside += OnTouchUpInside;
             _button.SetImage(
                 UIImage.GetSystemImage(GoForwardIconName)!,
                 UIControlState.Normal

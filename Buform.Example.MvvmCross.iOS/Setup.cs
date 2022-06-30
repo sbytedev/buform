@@ -48,7 +48,7 @@ namespace Buform.Example.MvvmCross.iOS
 
             Buform.RegisterGroupHeaderNib<HeaderFormGroup, HeaderFormGroupHeader>();
 
-            Buform.RegisterItemClass<RandomNumberGeneratorItem, DigitGenerationCell>();
+            Buform.RegisterItemClass<RandomNumberGeneratorItem, RandomNumberGeneratorCell>();
         }
     }
 }

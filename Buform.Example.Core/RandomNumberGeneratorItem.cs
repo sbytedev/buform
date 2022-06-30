@@ -19,10 +19,10 @@ namespace Buform.Example.Core
         {
             _random = new Random();
 
-            GenerateCommand = new MvxCommand(Regenerate);
+            GenerateCommand = new MvxCommand(Generate);
         }
 
-        private void Regenerate()
+        private void Generate()
         {
             Value = _random.Next(MinValue, MaxValue);
         }
