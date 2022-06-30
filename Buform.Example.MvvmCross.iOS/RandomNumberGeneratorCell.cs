@@ -85,13 +85,12 @@ namespace Buform.Example.MvvmCross.iOS
                 TextColor = UIColor.SecondaryLabel
             };
 
+            var image = UIImage.GetSystemImage(GoForwardIconName)!;
+
             _button = UIButton.FromType(UIButtonType.System);
-            _button.Frame = new CGRect(0, 0, 70, 40);
+            _button.Frame = new CGRect(0, 0, image.Size.Width, image.Size.Height);
             _button.TouchUpInside += OnTouchUpInside;
-            _button.SetImage(
-                UIImage.GetSystemImage(GoForwardIconName)!,
-                UIControlState.Normal
-            );
+            _button.SetImage(image, UIControlState.Normal);
 
             AccessoryView = _button;
 
