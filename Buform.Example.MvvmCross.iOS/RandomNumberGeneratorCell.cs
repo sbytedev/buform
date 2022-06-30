@@ -103,7 +103,7 @@ namespace Buform.Example.MvvmCross.iOS
                 _titleLabel.LeadingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.LeadingAnchor),
                 _valueLabel.TopAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TopAnchor),
                 _valueLabel.BottomAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.BottomAnchor),
-                _valueLabel.LeadingAnchor.ConstraintEqualTo(_titleLabel.LayoutMarginsGuide.TrailingAnchor, 16),
+                _valueLabel.TrailingAnchor.ConstraintEqualTo(ContentView.LayoutMarginsGuide.TrailingAnchor),
             });
         }
 
