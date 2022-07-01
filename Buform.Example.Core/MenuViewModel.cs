@@ -9,10 +9,11 @@ namespace Buform.Example.Core
 {
     public sealed class MenuViewModel : MvxNavigationViewModel
     {
-        public int GeneratedDigit { get; set; }
         public string Title { get; }
 
         public Form Form { get; }
+
+        public int RandomNumber { get; set; }
 
         public MenuViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
@@ -30,9 +31,9 @@ namespace Buform.Example.Core
                         InputType = ButtonInputType.Done
                     }
                 },
-                new TextFormGroup("Digit generation")
+                new TextFormGroup("Random number")
                 {
-                    new RandomNumberGeneratorItem(() => GeneratedDigit)
+                    new RandomNumberGeneratorItem(() => RandomNumber)
                     {
                         Label = "Number"
                     }
