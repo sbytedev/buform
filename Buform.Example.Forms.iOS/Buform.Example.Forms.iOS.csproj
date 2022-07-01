@@ -134,7 +134,7 @@
 
     <ItemGroup>
         <PackageReference Include="MvvmCross.Forms" Version="8.0.2" />
-        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2478+927-sha.9f26f70d6-azdo.6239473" />
         <PackageReference Include="FluentValidation" Version="11.1.0" />
         <PackageReference Include="Humanizer.Core" Version="2.14.1" />
         <PackageReference Include="PropertyChanged.Fody" Version="3.4.1" PrivateAssets="All" />
