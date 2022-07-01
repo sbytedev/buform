@@ -13,6 +13,8 @@ namespace Buform.Example.Core
 
         public Form Form { get; }
 
+        public int RandomNumber { get; set; }
+
         public MenuViewModel(ILoggerFactory logFactory, IMvxNavigationService navigationService)
             : base(logFactory, navigationService)
         {
@@ -27,6 +29,13 @@ namespace Buform.Example.Core
                     {
                         Label = "Show All Components",
                         InputType = ButtonInputType.Done
+                    }
+                },
+                new TextFormGroup("Random number")
+                {
+                    new RandomNumberGeneratorItem(() => RandomNumber)
+                    {
+                        Label = "Number"
                     }
                 },
                 new TextFormGroup("Examples", "Contains some real-life examples.")
