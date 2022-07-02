@@ -1,4 +1,3 @@
-using Buform.Example.Core;
 using Microsoft.Extensions.Logging;
 using MvvmCross;
 using MvvmCross.Commands;
