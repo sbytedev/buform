@@ -116,6 +116,7 @@
         <ImageAsset Include="Assets.xcassets\Logo.imageset\Contents.json" />
         <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@2x.png" />
         <ImageAsset Include="Assets.xcassets\Logo.imageset\Logo@3x.png" />
+        <ImageAsset Include="Assets.xcassets\Main.colorset\Contents.json" />
     </ItemGroup>
 
     <ItemGroup>

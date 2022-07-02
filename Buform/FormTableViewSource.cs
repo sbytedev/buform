@@ -7,7 +7,7 @@ using UIKit;
 namespace Buform
 {
     [Preserve(AllMembers = true)]
-    public sealed class FormTableViewSource : TableViewSource
+    public class FormTableViewSource : TableViewSource
     {
         public Form? Form
         {

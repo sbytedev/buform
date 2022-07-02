@@ -34,10 +34,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="FormView.cs" />
+        <Compile Include="BuformForms.cs" />
+        <Compile Include="FormGroupRegistry.cs" />
+        <Compile Include="FormView.cs" />
+        <Compile Include="FormsHeaderFooterView.cs" />
     </ItemGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+        <Compile Include="FormsFormTableViewSource.cs" />
+        <Compile Include="TableViewHeaderFooterView.cs" />
         <Compile Include="FormViewRendererIos.cs" />
     </ItemGroup>
 

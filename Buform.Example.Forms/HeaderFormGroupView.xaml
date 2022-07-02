@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<buform:FormsHeaderFooterView x:TypeArguments="core:HeaderFormGroup"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:buform="clr-namespace:Buform;assembly=Buform.Forms"
+                         xmlns:core="clr-namespace:Buform.Example.Core;assembly=Buform.Example.Core"
+                         x:Class="Buform.Example.Forms.HeaderFormGroupView">
+    <buform:FormsHeaderFooterView.Content>
+       <Grid>
+            <Image
+                Source="Logo"
+                HorizontalOptions="CenterAndExpand"
+                WidthRequest="206"
+                HeightRequest="128" />
+        </Grid>
+    </buform:FormsHeaderFooterView.Content>
+</buform:FormsHeaderFooterView>

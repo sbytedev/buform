@@ -2,7 +2,7 @@ using Xamarin.Forms;
 
 namespace Buform
 {
-    public class FormView : ListView
+    public class FormView : View
     {
         public static readonly BindableProperty FormProperty = BindableProperty.Create(
             nameof(Form),
