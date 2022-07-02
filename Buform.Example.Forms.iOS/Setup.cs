@@ -41,12 +41,5 @@ namespace Buform.Example.Forms.iOS
 
             iocProvider.LazyConstructAndRegisterSingleton<IMvxCommandHelper, MvxStrongCommandHelper>();
         }
-
-        protected override void InitializeLastChance(IMvxIoCProvider iocProvider)
-        {
-            base.InitializeLastChance(iocProvider);
-
-            BuformForms.RegisterGroupHeaderClass<HeaderFormGroup, HeaderFormGroupView>();
-        }
     }
 }
